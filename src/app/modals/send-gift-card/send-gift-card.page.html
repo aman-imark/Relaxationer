@@ -1,0 +1,177 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar  mode="ios" style="--min-height: 65px;">
+    <ion-buttons slot="start">
+      <ion-button disabled>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button color="dark" (click)="dismiss()">
+        <ion-icon slot="icon-only"  name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>Gift This</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+
+
+
+
+
+<ion-content>
+
+  <div>
+    <div class="ion-padding ion-text-center">
+        <p>Congratulations! Somehow, life has brought you to this incredible moment. A moment, where your greatest Gift is about to be opened. Activate your Gift Card here!</p>
+    </div>
+    
+    <ion-card mode="ios">
+      <ion-card-content>
+        <ion-grid>
+        <ion-radio-group [(ngModel)]="selectedGift">   
+          <ion-row>
+            <ion-col size="6">
+              <div style="margin:auto;text-align:center;">
+                  <div>
+                     <div><img src="assets/images/orange-img.png" style="height: 30px;"></div>
+                     <div style="height:110px;width:110px;display:flex; flex-direction: column;justify-content: center;border:4px solid #ff7345;margin: auto;">
+                        <div style="font-weight:600;color:#000;">{{yearlyGift?.gift_type}}</div>
+                        <div *ngIf="(yearlyGift?.gift_price)" style="font-weight:600;padding:4px 2px;
+                          color:#fe0a0a;font-size:20px;display: inline-flex;align-items: center;justify-content: center;">
+                          <ion-icon name="logo-usd"></ion-icon>{{yearlyGift?.gift_price}}
+                        </div>
+                     </div>
+                     <div class="ion-padding"><ion-radio mode="md" [value]="yearlyGift?.id+'/'+yearlyGift?.gift_price+'/'+yearlyGift?.gift_type"></ion-radio></div>
+                  </div>
+             </div>
+            </ion-col>
+            <ion-col size="6" >
+              <div style="margin:auto;text-align:center;">
+                  <div>
+                    <div><img src="assets/images/blue-img.png" style="height: 30px;"></div>
+                     <div style="height:110px;width:110px;display:flex; flex-direction: column;justify-content: center;border:4px solid #530861;margin: auto;">
+                         <div style="font-weight:600;color:#000;">{{lifetimeGift?.gift_type}}</div>
+                         <div *ngIf="(lifetimeGift?.gift_price)" style="font-weight:600;padding:4px 2px;
+                           color:#fe0a0a;font-size:20px;display: inline-flex;align-items: center;justify-content: center;">
+                           <ion-icon name="logo-usd"></ion-icon>{{lifetimeGift?.gift_price}}
+                         </div>
+                     </div>
+                     <div class="ion-padding"><ion-radio mode="md" [value]="lifetimeGift?.id+'/'+lifetimeGift?.gift_price+'/'+lifetimeGift?.gift_type"></ion-radio></div>
+                  </div>
+             </div>
+            </ion-col>
+          </ion-row>
+          </ion-radio-group>
+        </ion-grid>
+
+
+
+        <form [formGroup]="abForm"  (ngSubmit)="sendFGiftCard_Form()">
+          <ion-grid>
+            <ion-radio-group value="My Friend">
+              <div style="text-align:center;">
+                <h3>Your order will be sent to:</h3>
+                <div style="display: flex; justify-content: center; align-items: stretch; padding: 10px 0px;">
+                  <div style="font-size:14px;font-weight:600;">My Friend</div> &nbsp;&nbsp;
+                  <div><ion-radio mode="md" value="My Friend"></ion-radio></div>
+                </div>
+              </div>
+            </ion-radio-group>
+            <br>
+            <ion-row style="width:100%;height:auto;color: #000000;align-items: center;">
+               <ion-col size="12">
+                <ion-item lines="full" style="position:relative;--color:#4f4f4f;--padding-start: 0px;--inner-padding-end: 0px;--background: #f8f7f7;">
+                  <ion-input type="text" minlength="4" maxlength="16" placeholder="Friend's name*"  
+                  name="fname" formControlName="fname" requird style="--padding-start: 10px;--padding-end: 10px;"></ion-input>
+                </ion-item>
+               </ion-col>
+               <ion-col>
+                 <div *ngIf="(abForm.get('fname').touched || submitted) &&  abForm.get('fname').hasError('required')"  class="text-danger">Friend name is required.</div>
+                 <div *ngIf="(abForm.get('fname').touched || submitted) &&  abForm.get('fname').hasError('minlength')"  class="text-danger">Friend name should be more than 4 character.</div>
+               </ion-col>
+            </ion-row> <br>
+
+            <ion-row style="width:100%;height:auto;color: #000000;align-items: center;">
+              <ion-col size="12" style="--background: #f8f7f7;">
+               <ion-item lines="full" style="position:relative;--color:#4f4f4f;--padding-start: 0px;--inner-padding-end: 0px;--background: #f8f7f7;">
+                 <ion-input type="email"  placeholder="Friend's email*"  name="femail" formControlName="femail" requird style="--padding-start: 10px;--padding-end: 10px;"></ion-input>
+               </ion-item>
+              </ion-col>
+              <ion-col>
+                <div *ngIf="(abForm.get('femail').touched || submitted) &&  abForm.get('femail').hasError('required')"  class="text-danger">Friend email is required.</div>
+                <div *ngIf="(abForm.get('femail').touched || submitted) &&  abForm.get('femail').hasError('email')"  class="text-danger">Friend email address must be valid.</div>
+              </ion-col>
+            </ion-row> <br>
+
+            <ion-row style="width:100%;height:auto;color: #000000;align-items: center;">
+              <ion-col size="12">
+               <ion-item lines="full" style="position:relative;--color:#4f4f4f;--padding-start: 0px;--inner-padding-end: 0px;--background: #f8f7f7;">
+                 <ion-textarea #myTextArea autoGrow="false" rows="4" cols="20" name="fmessage" formControlName="fmessage" requird 
+                     placeholder="Messagee*" style="--padding-start: 10px;--padding-end: 10px;"></ion-textarea>
+               </ion-item>
+              </ion-col>
+              <ion-col>
+                <div *ngIf="(abForm.get('fmessage').touched || submitted) &&  abForm.get('fmessage').hasError('required')"  class="text-danger">Message is required.</div>
+                <div *ngIf="(abForm.get('fmessage').touched || submitted) &&  abForm.get('fmessage').hasError('minlength')"  class="text-danger">Message should be more than 4 character.</div>
+              </ion-col>
+            </ion-row>
+          </ion-grid><br><br>
+
+          <div style="display:flex;justify-content: space-evenly;">
+            <ion-button mode="md" type="reset" color="danger" fill="outline" shape="round" style="--height:40px;height: 40px;">Clear</ion-button>
+            <ion-button mode="md" type="submit" color="danger" fill="solid" shape="round"  style="--height:40px;height: 40px;">Confirm</ion-button>
+          </div>
+        </form>
+  </ion-card-content>
+  </ion-card>
+
+     
+</div>
+
+
+
+<!-- 
+      <ion-radio-group  [(ngModel)]="for_giftCard">
+        <div style="display:flex;justify-content: space-around; margin:10px 0px;">
+        <div>
+          <ion-label style="display: inline-flex;align-items: center;"> <ion-radio value="my_friend"></ion-radio>&nbsp;&nbsp;My friend</ion-label>
+        </div>
+        <div>
+          <ion-label style="display: inline-flex;align-items: center;"> <ion-radio value="me"></ion-radio>&nbsp;&nbsp;Me</ion-label>
+        </div>
+        </div>
+
+        <div *ngIf="(for_giftCard === 'my_friend')"><br>
+          <div style="margin: 0px 0px 20px;">
+            <ion-input type="text" placeholder="Friend's name"  style="border-bottom: 1px solid #d7d8da;color: #222222;"></ion-input>
+          </div>
+          <div style="margin: 0px 0px 20px;">
+            <ion-input type="email" placeholder="Friend's email"  style="border-bottom: 1px solid #d7d8da;color: #222222;"></ion-input>
+          </div>
+          <div>
+            <ion-input type="text" placeholder="Personal message:"  style="border-bottom: 1px solid #d7d8da;color: #222222;"></ion-input>
+          </div>
+          <br> <br>
+          <div style="display:flex;justify-content: space-around;">
+            <ion-button type="button" shape="round" fill="outline">Cancel</ion-button>
+            <ion-button type="button" shape="round">Confirm</ion-button>
+          </div> <br>
+        </div>
+
+        <div *ngIf="(for_giftCard === 'me')"><br>
+          <div style="margin: 0px 0px 20px;">
+            <ion-input type="text" placeholder="Full Name"  style="border-bottom: 1px solid #d7d8da;color: #222222;"></ion-input>
+          </div>
+          <div>
+            <ion-input type="email" placeholder="Email Address"  style="border-bottom: 1px solid #d7d8da;color: #222222;"></ion-input>
+          </div>
+          <br> <br>
+          
+        </div> -->
+
+
+ 
+  <!-- </div> -->
+</ion-content>  

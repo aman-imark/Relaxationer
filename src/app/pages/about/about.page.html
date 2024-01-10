@@ -1,0 +1,98 @@
+<ion-header>
+  <ion-toolbar >
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="/maintabs/tabs/tab4"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-start">About Relaxationer</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+
+
+<ion-content [fullscreen]="true">
+
+  <div *ngIf="(!about)" style="margin: 20px auto 0px;width:96%;">
+    <ion-skeleton-text animated style="width: 100%;height: 200px;border-radius:10px;"></ion-skeleton-text><br>
+    <div style="height: 25px; width: 70%; border-radius:4px; margin-bottom:25px;"><ion-skeleton-text animated style="width: 100%"></ion-skeleton-text></div>
+    <div style="height: 200px; width: 100%; border-radius:4px; margin-bottom:12px;"><ion-skeleton-text animated style="width: 100%"></ion-skeleton-text></div>
+    <div style="height: 200px; width: 100%; border-radius:4px;"><ion-skeleton-text animated style="width: 100%"></ion-skeleton-text></div>
+  </div>
+  <div *ngIf="(about)">
+    <ion-slides>
+      <ion-slide  *ngFor="let seg of about">
+        <div class="slide">
+          <div style="background: aliceblue;padding: 20px;">
+             <div style="width: 35vh;height: 35vh;margin: auto;">
+              <img style="border-radius:20px;height: 100%; width: 100%;object-fit: cover;" [src]="base_url+'/'+seg.image">
+             </div>
+          </div>
+          <div class="ion-padding" style="text-align: left;">
+             <h3>{{seg.title}}</h3>
+             <p [innerHtml]="seg.description"> </p>
+          </div>
+        </div>
+      </ion-slide>
+    </ion-slides>
+  </div>
+
+
+
+
+
+  <div *ngIf="(offer)">
+    <div class="ion-padding" style="background: aliceblue;"><h2 style="margin: 0px;">Relaxationer Offers</h2></div>
+    <div class="ion-padding" *ngFor="let itm of offer" style="text-align: left;">
+      <h3>{{itm.title}}</h3>
+      <p [innerHtml]="itm.description"> </p>
+    </div>
+  </div>
+
+
+  
+  <div *ngIf="(reviewData)">
+    <div class="ion-padding" style="background: aliceblue;">
+      <h2 style="margin: 0px;">Reviews</h2> <br>
+
+    <ion-slides class="cust-about-slides" mode="ios" pager="true" [options]="slideOpts">
+      <ion-slide *ngFor="let rvw of reviewData"><br>
+        <div style="width: 92%; margin: auto;">
+
+            <div style="display: flex;align-content: center;justify-content: start;align-items: center;">
+              <div style="width:90px;height:90px;border-radius: 100%;box-shadow: 0 0 6px 2px rgb(0 0 0 / 30%);">
+                <img [src]="review_base_url+'/'+rvw.avatar" style="height:100%;width:100%;object-fit: cover;border-radius: 100%;">
+              </div>
+
+              <div style="padding-left:8%;text-align:left;">
+                <h3 *ngIf="rvw.name" style="margin:2px 0px;">{{rvw.name}}</h3>
+                <p *ngIf="rvw.designation" style="font-size:12px;font-weight:800;opacity:0.8;margin:4px 0px;">{{rvw.designation}}</p>
+                <ion-rating-stars
+                [rating]="rvw.rating"
+                [color]="'#e8e3e3'"
+                [filledColor]="'#FF0000'"
+                [margin]="4"
+                [size]="20"
+                [disabled]="true"></ion-rating-stars>
+              </div>
+            </div>
+            <div style="text-align:left;margin-top:10px;"><br>
+              <h4 *ngIf="rvw.title">“{{rvw.title}}”</h4>
+              <p *ngIf="rvw.description">{{rvw.description}}</p>
+            </div>
+        </div>
+      </ion-slide>
+    </ion-slides>
+    </div>
+  </div>
+
+
+</ion-content>
+
+
+<!-- <ion-footer style="background:#fff;--background: #fff;">
+  <div style="display:flex; justify-content: space-between; align-items: center;margin: 12px 10px;">
+    <div style="width:100%;">
+      <ion-button mode="md" color="primary" shape="round" expand="full" color="danger">Unlock all Journey Subscribe</ion-button>
+    </div>
+  </div>
+</ion-footer> -->

@@ -1,0 +1,90 @@
+<ion-content style="--background: linear-gradient(315deg, #a55c1b 0%, #000000 74%);">
+  <ion-toolbar style="--background: transparent;z-index:2;">
+    <div class="ion-padding">
+    <h2 class="ion-padding" style="color:#fff !important; margin: 0px !important;">{{song_tilte}}</h2>
+    </div>
+    <ion-buttons slot="end" class="cust-close">
+      <ion-button color="light" class="cust-close" shape="round" (click)="dismiss()">
+        <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar> 
+
+
+
+  <ion-card  mode="ios" [style.--background]="'url('+bg_img+')'" style="position:relative;text-align: center;color: #ffffff; 
+     width: 310px; height: 310px; max-width: 320px; max-height: 320px;display: flex;align-items: center;justify-content: center;margin:auto;
+     background-repeat: no-repeat; background-size: cover; background-position: center;">
+    <div style="display:flex;height:100%;width:100%;justify-content: center;align-items:center;background: #00000070;">
+      <div style="height: 80px;width: 80px;text-align: center;">
+        <img style="width:100%;height:100%;" src="assets/Logo/Logo@3x.png" class="rotate">
+        <!-- <ion-spinner name="circles"></ion-spinner> -->
+      </div>
+    </div>
+  </ion-card>
+
+  <ion-grid>
+    <ion-row>
+    <ion-toolbar mode="md" style="--background: transparent;--color:#ffffff;z-index: 9;visibility: visible;">
+      <ion-buttons style="justify-content: space-evenly;">
+        <ion-button style="--color: #ffffff;" (click)="shareJourney_Song()">
+          <ion-icon slot="icon-only" name="share-social-outline"></ion-icon>
+        </ion-button> 
+        &nbsp;&nbsp;&nbsp;
+        <ion-button *ngIf="(song_fav === 'no')"  shape="round" (click)="addTo_Wishlist(song_id)">
+          <ion-icon slot="icon-only" name="heart-outline"></ion-icon>
+        </ion-button>
+        <ion-button *ngIf="(song_fav === 'yes')"  shape="round" (click)="removeFrom_Wishlist(song_id)">
+          <ion-icon slot="icon-only" name="heart"></ion-icon>
+        </ion-button>
+        &nbsp;&nbsp;&nbsp;
+        <ion-button style="--color: #ffffff;" (click)="download_JourneySong(song_name, song_download)">
+          <ion-icon slot="icon-only" name="cloud-download-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+    </ion-row><br><br>
+    <ion-row>
+      <div  style="width: 88%; margin: auto;">
+        <ion-range min="0" max="{{duration}}" [(ngModel)]="position" color="danger"> </ion-range>
+        <div class="rangePlaytime">
+          <ion-label class="startTime" >{{ display_position }}</ion-label>
+          <ion-label class="endTime"  *ngIf="duration === -1">00:00</ion-label>
+          <ion-label class="endTime"  *ngIf="duration !== -1">{{ display_duration }}</ion-label>
+        </div>    
+      </div>
+    </ion-row>
+
+    <!-- <video width="300" controls="" playsinline="" preload="metadata" 
+    poster="https://relaxationer.com/storage/journey-level/November2021/GP9nkG7ettqWb3HzDECt.jpg" 
+    src="https://relaxationer.com/storage/journey-level/December2021/tPalqXXkuRtOSKl9uL7j.mp3">
+    </video> -->
+
+    <ion-row>
+      <div style="width: 88%; margin: auto;">
+      <ion-toolbar  mode="md"  style="--background: transparent;--color:#ffffff;z-index: 9;visibility: visible;--min-height:100px;">
+        <ion-buttons style="justify-content: space-evenly;">
+          <ion-button style="--color: #ffffff;" (click)="controlSeconds('back')" style="height:55px;width:55px;">
+            <ion-icon slot="icon-only" src="/assets/backward.svg"  style="font-size: 3em;"></ion-icon>            
+          </ion-button> 
+          &nbsp; &nbsp; 
+          <ion-button style="--color: #ffffff;width: 90px; height: 90px;" (click)="play()" *ngIf="!is_playing">
+            <ion-icon slot="icon-only" name="play-circle-outline" style="font-size: 70px; "></ion-icon>
+          </ion-button> 
+          <ion-button style="--color: #ffffff;width: 90px; height: 90px;" (click)="pause()" *ngIf="is_playing">
+            <ion-icon slot="icon-only" name="pause-circle-outline" style="font-size: 70px; "></ion-icon>
+          </ion-button> 
+          &nbsp; &nbsp; 
+          <ion-button style="--color: #ffffff;" (click)="controlSeconds('forward')"  style="height:55px;width:55px;">
+            <ion-icon slot="icon-only" src="/assets/forward.svg"  style="font-size: 3em;"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+      </div>
+    </ion-row>
+  </ion-grid>
+
+
+
+
+</ion-content>

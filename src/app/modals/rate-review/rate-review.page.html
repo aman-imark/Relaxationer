@@ -1,0 +1,77 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar  mode="ios" style="--min-height: 65px;">
+    <ion-buttons slot="start">
+      <ion-button disabled>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button color="dark" (click)="dismiss()">
+        <ion-icon slot="icon-only"  name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>Rating & Review</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+
+
+<ion-content> 
+  <form  [formGroup]="rvwForm"  (ngSubmit)="submitRating()">
+
+    <div class="ion-padding" style="text-align:center;"><br>
+      <!-- <ionic-rating-component #rating
+         activeIcon = "star"
+         defaultIcon = "star"
+         activeColor = "#FF0000" 
+         defaultColor = "#e8e3e3"
+         readonly = "false"
+         [rating] = "initRating"
+         fontSize = "30px"
+         (ratingChanged) ="onRatingChange($event)"
+         name="rating" formControlName="rating" requird>
+      </ionic-rating-component> -->
+
+      <!-- <ion-rating-stars
+      [rating]="3"
+      [color]="'darkgrey'"
+      [filledColor]="'orange'"
+      [margin]="2"
+      [size]="20"
+      [disabled]="false"
+      (ratingChange)="ratingChanged($event)"></ion-rating-stars> -->
+
+      <ion-rating-stars #rating
+      [color]="'#e8e3e3'"
+      [filledColor]="'#FF0000'"
+      [margin]="8"
+      [size]="40"
+      [disabled]="false" name="rating" formControlName="rating" requird (ratingChange)="ratingChanged($event)"></ion-rating-stars>
+      <div class="ion-padding-vertical" *ngIf="(rvwForm.get('rating').touched || submitted) &&  rvwForm.get('rating').hasError('required')"  class="text-danger">Please give a star rating!</div>
+    </div><br>
+
+
+    <div class="ion-padding">
+      <div><ion-text style="font-weight: 800;color:#424242;margin-bottom:5px;">Review</ion-text></div>
+
+        <ion-textarea #myTextArea minlength="4" name="description" formControlName="description" requird
+           placeholder="Write a comment here*" 	autoGrow="false" rows="4"
+           style="border-bottom: 1px solid #d7d8da;color: #333333;background: #f8f7f7;"></ion-textarea>
+
+      <div *ngIf="(rvwForm.get('description').touched || submitted) &&  rvwForm.get('description').hasError('required')"  class="text-danger">Please write your review!</div>
+      <div *ngIf="(rvwForm.get('description').touched || submitted) &&  rvwForm.get('description').hasError('minlength')"  class="text-danger">Review must be at least 4 characters long.</div>
+    </div>
+ 
+  
+    <div class="ion-padding" style="text-align: center;">
+       <br>
+       <ion-button mode="md" type="submit" shape="round" expand="block" color="danger" >Submit Review</ion-button>
+       <br>
+    </div>
+  </form>
+</ion-content>  
+
+
+
+

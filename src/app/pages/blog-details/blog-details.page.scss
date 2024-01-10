@@ -1,0 +1,46 @@
+.rld-main{
+    width: 120px;
+    height: 175px;
+    margin: 0px 12px 0px 8px;
+}
+
+
+  .rld-img{
+    width: 120px;
+    height: 120px;
+    overflow: hidden;
+    background: #EFF3FF;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+
+    img{
+      max-width:94%;
+      margin: auto;
+      max-height:90%;
+    }
+  }
+  
+  .rld-text{
+    width:130px; height:55px;
+    padding: 4px;
+    overflow: hidden;
+    font-size: 15px;
+    // background-color: #e5e7e775;
+    border-radius: 0px 0px 10px 10px;
+  }
+  .rld-title{
+    color: #000000a5;
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-height: 20px;
+    max-height: 40px;
+    -webkit-box-orient: vertical;
+    margin: 2px 0px 4px;
+  }
+  

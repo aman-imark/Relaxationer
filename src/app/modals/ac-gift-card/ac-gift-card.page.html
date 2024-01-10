@@ -1,0 +1,78 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar  mode="ios" style="--min-height: 65px;">
+    <ion-buttons slot="start">
+      <ion-button disabled>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button color="dark" (click)="dismiss()">
+        <ion-icon slot="icon-only"  name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>Gift Card Activation</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content>
+<div>
+    <div class="ion-padding" style="text-align: center;">
+      <img  [src]="base_url+'/'+giftCardData?.image"  onError="this.src='assets/images/tt@3x.png'"  style="height:100px;">
+      <br>
+      <p>Congratulations! Somehow, life has brought you to this incredible moment. A moment, where your greatest Gift is about to be opened. Activate your Gift Card here!</p>
+    </div>
+    
+
+    <ion-card mode="ios" class="ion-padding">
+        <form [formGroup]="abForm"  (ngSubmit)="activateFGiftCard_Form()">
+          <ion-grid>
+            <ion-row style="width:100%;height:auto;color: #000000;align-items: center;">
+               <ion-col size="12">
+                <ion-item lines="full" style="position:relative;--color:#4f4f4f;--padding-start: 0px;--inner-padding-end: 0px;--background: #f8f7f7;">
+                  <ion-input type="text" minlength="4" maxlength="16" placeholder="Name*"  name="name" formControlName="name" requird style="--padding-start: 10px;--padding-end: 10px;"></ion-input>
+                </ion-item>
+               </ion-col>
+               <ion-col>
+                  <div *ngIf="(abForm.get('name').touched || submitted) &&  abForm.get('name').hasError('required')"  class="text-danger">Name is required.</div>
+                  <div *ngIf="(abForm.get('name').touched || submitted) &&  abForm.get('name').hasError('minlength')"  class="text-danger">Name should be more than 4 character.</div>
+               </ion-col>
+            </ion-row> <br>
+
+            <ion-row style="width:100%;height:auto;color: #000000;align-items: center;">
+              <ion-col size="12">
+               <ion-item lines="full" style="position:relative;--color:#4f4f4f;--padding-start: 0px;--inner-padding-end: 0px;--background: #f8f7f7;">
+                 <ion-input type="email"  placeholder="Email*"  name="email" formControlName="email" requird style="--padding-start: 10px;--padding-end: 10px;"></ion-input>
+               </ion-item>
+              </ion-col>
+              <ion-col>
+                <div *ngIf="(abForm.get('email').touched || submitted) &&  abForm.get('email').hasError('required')"  class="text-danger">Email is required.</div>
+                <div *ngIf="(abForm.get('email').touched || submitted) &&  abForm.get('email').hasError('email')"  class="text-danger">Email address must be valid.</div>
+              </ion-col>
+
+            </ion-row> <br>
+
+            <ion-row style="width:100%;height:auto;color: #000000;align-items: center;">
+              <ion-col size="12">
+               <ion-item lines="full" style="position:relative;--color:#4f4f4f;--padding-start: 0px;--inner-padding-end: 0px;--background: #f8f7f7;">
+                 <ion-input type="text" minlength="4" maxlength="16" placeholder="Gift Card Code*"  name="code" formControlName="code" requird style="--padding-start: 10px;--padding-end: 10px;"></ion-input>
+               </ion-item>
+              </ion-col>
+              <ion-col>
+                <div *ngIf="(abForm.get('code').touched || submitted) &&  abForm.get('code').hasError('required')"  class="text-danger">Gift code is required.</div>
+                <div *ngIf="(abForm.get('code').touched || submitted) &&  abForm.get('code').hasError('minlength')"  class="text-danger">Gift code should be more than 4 character.</div>
+              </ion-col>
+            </ion-row>
+          </ion-grid><br>
+
+          <div class="ion-padding" style="width:80%;margin:auto;">
+            <ion-button mode="md" type="submit" shape="round" expand="block" style="--background:#FF0000;" style="height:40px;--height:40px;">Activate Gift Card</ion-button><br>
+          </div>
+      </form>
+  </ion-card>
+
+    
+</div>
+</ion-content>  
+

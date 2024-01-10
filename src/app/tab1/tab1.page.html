@@ -1,0 +1,340 @@
+<ion-header>
+  <ion-toolbar style="--min-height: 70px;">
+
+    <div *ngIf="(!segmentLevel || segmentLevel?.length === 0)" style="display:flex;overflow:scroll;">
+      <div class="load-seg"><ion-skeleton-text animated></ion-skeleton-text></div>
+      <div class="load-seg"><ion-skeleton-text animated></ion-skeleton-text></div>
+      <div class="load-seg"><ion-skeleton-text animated></ion-skeleton-text></div>
+      <div class="load-seg"><ion-skeleton-text animated></ion-skeleton-text></div>
+      <div class="load-seg"><ion-skeleton-text animated></ion-skeleton-text></div>
+      <div class="load-seg"><ion-skeleton-text animated></ion-skeleton-text></div>
+      <div class="load-seg"><ion-skeleton-text animated></ion-skeleton-text></div>
+    </div>
+
+
+    <ion-segment *ngIf="(segmentLevel?.length >= 1)" mode="ios" class="my-journey-seg" [(ngModel)]="selectedSegLevel" scrollable (ionChange)="onSegmentChanged($event)">
+      <ion-segment-button mode="ios" value="0" id="segment-0">
+        <ion-label>All</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="1" id="segment-1">
+        <ion-icon name="heart" style="padding:4px 0px;"></ion-icon>
+      </ion-segment-button>
+
+      <ion-segment-button mode="ios" *ngFor="let sgl of segmentLevel; index as i"  [value]="i+2" id="segment-{{i+2}}">
+        <ion-label>Level {{i+1}}</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+  </ion-toolbar>
+</ion-header>
+
+
+
+
+
+<ion-content [fullscreen]="true"> 
+  <ion-refresher mode="md" slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div style="display:block;width:100%;"  *ngIf="(!segmentLevel || segmentLevel?.length === 0)">
+    <ion-grid class="sec-3">
+      <ion-row>
+        <ion-card mode="ios" style="width:100%;height: 300px;">
+            <ion-skeleton-text animated style="height: 300px; width: 100%;margin:0px;padding:0px;"></ion-skeleton-text>
+        </ion-card>
+      </ion-row>
+      <ion-row>
+        <ion-col size="6">
+          <ion-card mode="ios"  style="height:140px;">
+             <ion-skeleton-text animated style="height: 140px;width: 100%;margin:0px;padding:0px;"></ion-skeleton-text>
+          </ion-card>
+        </ion-col>
+        <ion-col size="6">
+          <ion-card mode="ios"  style="height:140px;">
+             <ion-skeleton-text animated style="height: 140px;width: 100%;margin:0px;padding:0px;"></ion-skeleton-text>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="6">
+          <ion-card mode="ios"  style="height:140px;">
+             <ion-skeleton-text animated style="height: 140px;width: 100%;margin:0px;padding:0px;"></ion-skeleton-text>
+          </ion-card>
+        </ion-col>
+        <ion-col size="6">
+          <ion-card mode="ios"  style="height:140px;">
+             <ion-skeleton-text animated style="height: 140px;width: 100%;margin:0px;padding:0px;"></ion-skeleton-text>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="6">
+          <ion-card mode="ios"  style="height:140px;">
+             <ion-skeleton-text animated style="height: 140px;width: 100%;margin:0px;padding:0px;"></ion-skeleton-text>
+          </ion-card>
+        </ion-col>
+        <ion-col size="6">
+          <ion-card mode="ios"  style="height:140px;">
+             <ion-skeleton-text animated style="height: 140px;width: 100%;margin:0px;padding:0px;"></ion-skeleton-text>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="6">
+          <ion-card mode="ios"  style="height:140px;">
+             <ion-skeleton-text animated style="height: 140px;width: 100%;margin:0px;padding:0px;"></ion-skeleton-text>
+          </ion-card>
+        </ion-col>
+        <ion-col size="6">
+          <ion-card mode="ios"  style="height:140px;">
+             <ion-skeleton-text animated style="height: 140px;width: 100%;margin:0px;padding:0px;"></ion-skeleton-text>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+ <ion-slides  #slides (ionSlideDidChange)="onSlideChanged()" scrollbar="false" [options]="slideConfig">  
+
+  <ion-slide>
+    <div style="display:block;width:100%;">
+        <!-- <div *ngIf="(segmentLevel?.length === 0)" style="display:flex;align-items: center;justify-content: center;height:100%;font-weight:600;color: #666666;">
+          No Records Found!
+        </div> -->
+
+
+        <div *ngIf="(segmentLevel?.length >= 1)">
+        <div *ngFor="let itm of segmentLevel; index as j">
+              <div style="height: 200px; width: 100%;position:relative;top:0px;right:0px;left:0px;bottom:0px;">
+                <img [src]="base_url+'/'+itm.image" style="height: 100%; width: 100%;object-fit: cover;">
+                <div class="my-overlay">
+                  <h3>Level {{j+1}}.&nbsp;&nbsp;{{itm.title}}</h3>
+                  <!-- <h3 style="text-align:center;">My Journey</h3> -->
+                </div>
+              </div>
+              <!-- <div class="ion-padding-horizontal cstm" [innerHtml]="itm.description"></div> -->
+
+            
+
+            <div style="width: 100%;" class="ion-padding">
+              <!-- <h3>Level {{j+1}}.&nbsp;&nbsp;{{itm.title}}</h3> -->
+              <ion-chip mode="ios" *ngFor="let lvl of itm.level | slice:0: itm.journey_level_id?.length; index as i" style="height: 36px; width: 20px;border-radius: 8px;
+               text-align: center;background: #07ee38;justify-content: center;padding-inline:0px;">
+                <small style="font-weight:600;color:#fff;">{{i+1}}</small>
+              </ion-chip>
+
+              <ion-chip mode="ios" *ngFor="let lvl of itm.level | slice:itm.journey_level_id?.length; index as i" style="height: 36px; width: 20px;border-radius: 8px;
+               text-align: center;background: #1959ff;justify-content: center;padding-inline:0px;">
+                <small style="font-weight:600;color:#fff;">{{i+itm.journey_level_id?.length+1}}</small>
+              </ion-chip>
+    
+              <div  *ngIf="(itm.level?.length >= 1)">
+                <ion-progress-bar mode="ios" [value]="itm.progress / 100"
+                   style="margin-inline: 4px;--buffer-background:#66666624;--progress-background: #FF0000;"></ion-progress-bar>
+                <ion-text style="color:#666666;margin-inline: 4px;font-size: 12px;font-weight: 800;" >{{itm.progress}}% Done   ({{itm.journey_level_id?.length}})</ion-text>
+              </div>
+            </div>
+    
+            <ion-grid>
+            <ion-row>
+              <ion-col size="6" *ngFor="let lvl of itm.level; index as i">
+                  <ion-card mode="ios">
+                      <div style="height: 150px; width: 100%;position:relative;top:0px;right:0px;left:0px;bottom:0px;">
+                        <img [src]="base_url+'/'+lvl.image" style="height: 100%; width: 100%;object-fit: cover;">
+                        <div style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);" 
+                             (click)="goto_journeyDetailPage(j+1, itm.title, itm.id, lvl.id, lvl.type)">
+                          <ion-icon  name="play-circle-outline" class="play-button"></ion-icon>
+                          <!-- (click)="playJourney_Music(base_url+'/'+lvl?.image,
+                          lvl.id, lvl.title, lvl.audio_time, 
+                           lvl.fav, lvl.original_name, lvl.download_link)" -->
+                        </div>
+                        <div *ngIf="(lvl.type === 'free')" style="position: absolute;top: 72%;left: 50%;transform: translate(-50%, -50%);">
+                          <ion-chip mode="ios" style="background:#ff000070;height:25px !important;justify-content: center;"><small style="font-weight:600;color:#fff;">Free</small></ion-chip>
+                        </div>
+                        <div *ngIf="(lvl.type === 'paid' && userPlan)" style="position: absolute;top: 72%;left: 50%;transform: translate(-50%, -50%);">
+                          <ion-chip mode="ios" style="background:#1959ffb8;height:25px !important;justify-content: center;"><small style="font-weight:600;color:#fff;">Play</small></ion-chip>
+                        </div>
+                        <div style="position: absolute; top: 6px; right: 6px;">
+                          <ion-buttons>
+                            <ion-button *ngIf="(lvl.fav === 'no')" class="cust-save" shape="round" (click)="addTo_Wishlist(lvl.id)">
+                              <ion-icon slot="icon-only" name="heart-outline"></ion-icon>
+                            </ion-button>
+                            <ion-button *ngIf="(lvl.fav === 'yes')" class="cust-save" shape="round" (click)="removeFrom_Wishlist(lvl.id)">
+                              <ion-icon slot="icon-only" name="heart"></ion-icon>
+                            </ion-button>
+                          </ion-buttons>
+                        </div>
+                        <div  *ngIf="(!userPlan && (lvl.type === 'paid'))" style="position: absolute; top: 42px; right: 6px;">
+                          <ion-buttons>
+                            <ion-button class="cust-lock" shape="round">
+                              <ion-icon slot="icon-only" name="lock-closed-outline"></ion-icon>
+                            </ion-button>
+                          </ion-buttons>
+                        </div>
+                      </div>
+                  </ion-card>
+                  <ion-item lines="none" detail="false" (click)="goto_journeyDetailPage(j+1, itm.title, itm.id, lvl.id, lvl.type)">
+                    <ion-label  class="ion-text-center ion-text-wrap" style="margin: 0px 0px 15px;">
+                      <h4 *ngIf="(lvl.title)">{{i+1}}. {{lvl.title}}</h4>
+                      <p *ngIf="(lvl.audio_time)">{{lvl.audio_time}} Min.</p>
+
+                      <h4 *ngIf="(!lvl.title)">Unknown</h4>
+                      <p *ngIf="(!lvl.audio_time)">00.00 Min.</p>
+                    </ion-label>
+                  </ion-item>
+              </ion-col>
+            </ion-row>
+            </ion-grid>
+
+        <ion-item-divider mode="ios"> </ion-item-divider>
+        </div>
+        </div>
+    </div>
+  </ion-slide>  
+
+
+  <ion-slide>
+    <div style="display:block;width:100%;">
+
+        <!-- <div>
+        <div *ngIf="(userWishlistData?.length === 0)" 
+        style="display:flex;align-items: center;justify-content: center;height:100%;font-weight:600;color: #666666;border:1px solid red;">
+          No Records Found!
+        </div>
+        </div> -->
+     
+        <ion-grid  *ngIf="(userWishlistData?.length >= 1)">
+        <ion-row>
+            <ion-col size="6" *ngFor="let ptd of userWishlistData; index as s">
+              <ion-card mode="ios">
+                <div style="height: 150px; width: 100%;position:relative;top:0px;right:0px;left:0px;bottom:0px;">
+                <img [src]="base_url+'/'+ptd.image" style="height: 100%; width: 100%;object-fit: cover;">
+                <div style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);">
+                  <ion-icon  name="play-circle-outline" class="play-button"></ion-icon>
+                </div>
+                <div *ngIf="(ptd.type === 'free')" style="position: absolute;top: 72%;left: 50%;transform: translate(-50%, -50%);">
+                  <ion-chip mode="ios" style="background:#ff000070;height:25px !important;justify-content: center;"><small style="font-weight:600;color:#fff;">Free</small></ion-chip>
+                </div>
+                <div *ngIf="(ptd.type === 'paid' && userPlan)" style="position: absolute;top: 72%;left: 50%;transform: translate(-50%, -50%);">
+                  <ion-chip mode="ios" style="background:#1959ffb8;height:25px !important;justify-content: center;"><small style="font-weight:600;color:#fff;">Play</small></ion-chip>
+                </div>
+                <div style="position: absolute; top: 6px; right: 6px;">
+                  <ion-buttons>
+                    <ion-button class="cust-save" shape="round" (click)="removeFrom_Wishlist(ptd.id)">
+                      <ion-icon slot="icon-only" name="heart"></ion-icon>
+                    </ion-button> 
+                  </ion-buttons>
+                </div>
+                <div  *ngIf="(!userPlan && (ptd.type === 'paid'))" style="position: absolute; top: 42px; right: 6px;">
+                  <ion-buttons>
+                    <ion-button class="cust-lock" shape="round">
+                      <ion-icon slot="icon-only" name="lock-closed-outline"></ion-icon>
+                    </ion-button>
+                  </ion-buttons>
+                </div>
+                </div>
+              </ion-card>
+              <ion-item lines="none" detail="false">
+                <ion-label class="ion-text-center ion-text-wrap" style="margin: 0px 0px 15px;" (click)="goto_journeyDetailPage2(ptd.journey_id, ptd.id)">
+                  <h4 *ngIf="(ptd.title)">{{s+1}}. {{ptd.title}}</h4>
+                  <p *ngIf="(ptd.audio_time)" class="ion-padding-horizontal ion-text-center">{{ptd.audio_time}} Min.</p>
+              
+                  <h4 *ngIf="(!ptd.title)">Unknown</h4>
+                  <p *ngIf="(!ptd.audio_time)" class="ion-padding-horizontal ion-text-center">00.00 Min.</p>
+                </ion-label>
+              </ion-item>
+            </ion-col>
+        </ion-row>
+        </ion-grid>
+    </div>
+  </ion-slide>  
+
+
+
+  <ion-slide *ngFor="let sgl of segmentLevel; index as k">
+    <div style="display:block;width:100%;">
+        <div>
+          <div style="height: 200px; width: 100%;position:relative;top:0px;right:0px;left:0px;bottom:0px;">
+            <img [src]="base_url+'/'+sgl.image" style="height: 100%; width: 100%;object-fit: cover;">
+            <div class="my-overlay">
+              <h3>Level {{k+1}}.&nbsp;&nbsp;{{sgl.title}}</h3>
+            </div>
+          </div>
+          <div class="ion-padding-horizontal cstm" [innerHtml]="sgl.description"></div>
+          <!-- <div class="ion-padding">
+            <div [innerHtml]="itm.description" class="cstm"></div>
+          </div> -->
+
+
+        <div style="width: 100%;" class="ion-padding">
+
+          <ion-chip mode="ios" *ngFor="let sl of sgl.level | slice:0: sgl.journey_level_id?.length; index as i" style="height: 36px; width: 20px;border-radius: 8px;
+           text-align: center;background: #07ee38;justify-content: center;padding-inline:0px;">
+            <small style="font-weight:600;color:#fff;">{{i+1}}</small>
+          </ion-chip> 
+          <ion-chip mode="ios" *ngFor="let sl of sgl.level | slice:sgl.journey_level_id?.length; index as i" style="height: 36px; width: 20px;border-radius: 8px;
+           text-align: center;background: #1959ff;justify-content: center;padding-inline:0px;">
+            <small style="font-weight:600;color:#fff;">{{i+sgl.journey_level_id?.length+1}}</small>
+          </ion-chip>
+          <div  *ngIf="(sgl.level?.length >= 1)">
+            <ion-progress-bar mode="ios" [value]="sgl.progress / 100"
+               style="margin-inline: 4px;--buffer-background:#66666624;--progress-background: #FF0000;"></ion-progress-bar>
+            <ion-text style="color:#666666;margin-inline: 4px;font-size: 12px;font-weight: 800;" >{{sgl.progress}}% Done</ion-text>
+          </div>
+        </div>
+
+        <ion-grid>
+        <ion-row>
+            <ion-col size="6" *ngFor="let sl of sgl.level; index as i">
+              <ion-card mode="ios">
+              <div style="height: 150px; width: 100%;position:relative;top:0px;right:0px;left:0px;bottom:0px;">
+                <img [src]="base_url+'/'+sl.image" style="height: 100%; width: 100%;object-fit: cover;">
+                <div style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);">
+                  <ion-icon  name="play-circle-outline" class="play-button"></ion-icon>
+                </div>
+                <div *ngIf="(sl.type === 'free')" style="position: absolute;top: 72%;left: 50%;transform: translate(-50%, -50%);">
+                  <ion-chip mode="ios" style="background:#ff000070;height:25px !important;justify-content: center;"><small style="font-weight:600;color:#fff;">Free</small></ion-chip>
+                </div>
+                <div *ngIf="(sl.type === 'paid' && userPlan)" style="position: absolute;top: 72%;left: 50%;transform: translate(-50%, -50%);">
+                  <ion-chip mode="ios" style="background:#1959ffb8;height:25px !important;justify-content: center;"><small style="font-weight:600;color:#fff;">Play</small></ion-chip>
+                </div>
+                <div style="position: absolute; top: 6px; right: 6px;">
+                  <ion-buttons>
+                    <ion-button *ngIf="(sl.fav === 'no')" class="cust-save" shape="round" (click)="addTo_Wishlist(sl.id)">
+                      <ion-icon slot="icon-only" name="heart-outline"></ion-icon>
+                    </ion-button>
+                    <ion-button *ngIf="(sl.fav === 'yes')" class="cust-save" shape="round" (click)="removeFrom_Wishlist(sl.id)">
+                      <ion-icon slot="icon-only" name="heart"></ion-icon>
+                    </ion-button>
+                  </ion-buttons>
+                </div>
+                <div  *ngIf="(!userPlan && (sl.type === 'paid'))"  style="position: absolute; top: 42px; right: 6px;">
+                  <ion-buttons>
+                    <ion-button class="cust-lock" shape="round">
+                      <ion-icon slot="icon-only" name="lock-closed-outline"></ion-icon>
+                    </ion-button>
+                  </ion-buttons>
+                </div>
+              </div>
+              </ion-card>
+              <ion-item lines="none" detail="false" (click)="goto_journeyDetailPage(k+1, sgl.title, sgl.id, sl.id, sl.type)">
+                <ion-label class="ion-text-center ion-text-wrap" style="margin: 0px 0px 15px;">
+                  <h4 *ngIf="(sl.title)">{{i+1}}. {{sl.title}}</h4>
+                  <p *ngIf="(sl.audio_time)" class="ion-padding-horizontal ion-text-center">{{sl.audio_time}} Min.</p>
+
+                  <h4 *ngIf="(!sl.title)">Unknown</h4>
+                  <p *ngIf="(!sl.audio_time)" class="ion-padding-horizontal ion-text-center">00.00 Min.</p>
+                </ion-label>
+              </ion-item>
+            </ion-col>
+        </ion-row>
+        </ion-grid>
+        </div>
+      </div>
+  </ion-slide>  
+  
+</ion-slides> <br> 
+
+
+</ion-content>

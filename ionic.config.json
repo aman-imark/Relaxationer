@@ -1,0 +1,7 @@
+{
+  "name": "Relaxationer",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

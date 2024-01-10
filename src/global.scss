@@ -1,0 +1,470 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+
+
+
+@font-face {   
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: normal;
+  src: url('./assets/fonts/Ubuntu/Ubuntu-Regular.ttf');
+}
+
+@font-face {   
+  font-family: 'Ubuntu500';
+  font-weight: 500;
+  src: url('./assets/fonts/Ubuntu/Ubuntu-Medium.ttf');
+}
+
+@font-face {   
+  font-family: 'Ubuntu600';
+  font-weight: 600;
+  src: url('./assets/fonts/Ubuntu/Ubuntu-Medium.ttf');
+}
+
+@font-face {   
+  font-family: 'Ubuntu800';
+  font-weight: 800;
+  src: url('./assets/fonts/Ubuntu/Ubuntu-Bold.ttf');
+}
+
+
+
+@font-face {   
+  font-family: 'Museo';
+  font-style: normal;
+  font-weight: normal;
+  src: url('./assets/fonts/Museo/Museo300.otf');
+}
+
+
+@font-face {   
+  font-family: 'Museo500';
+  font-weight: 500;
+  src: url('./assets/fonts/Museo/Museo500.otf');
+}
+
+@font-face {   
+  font-family: 'Museo800';
+  font-weight: 800;
+  src: url('./assets/fonts/Museo/Museo800.otf');
+}
+
+
+@font-face {   
+  font-family: 'DidactGothic-Regular';
+  font-weight: 500;
+  src: url('./assets/fonts/DidactGothic/DidactGothic-Regular.ttf');
+}
+
+
+@font-face {   
+  font-family: 'DidactGothic-Medium';
+  font-weight: 800;
+  src: url('./assets/fonts/DidactGothic/DidactGothic-Medium.ttf');
+}
+
+
+
+/* Set variables for all modes */
+:root {
+  --ion-font-family: 'Ubuntu';
+  // --ion-text-color: #323232; 
+  // --ion-text-color: #4a4a4a; 
+
+  /* Set the background of the entire app */
+  --ion-background-color: #ffffff;
+
+  /* Set text color of the entire app for iOS only */
+  // .ios {
+  //   // --ion-text-color: #000;
+  // }
+  // /* Set text color of the entire app for Material Design only */
+  // .md {
+  //   // --ion-text-color: #222;
+  // }
+}
+
+
+
+
+
+ion-header{
+  ion-title{
+    font-weight:800;
+    font-size:20px;
+    color: #000000;
+    // color: #0a0a0b;
+    font-family: Ubuntu600;
+  }
+  ion-back-button{
+    color: #000000;
+  }
+}
+
+
+ion-content{
+  ion-button.md{
+    font-weight:600; height: 48px;
+    font-size:16px;text-transform: initial; letter-spacing: normal;
+  }
+  ion-button.ios{
+    font-weight:600; height: 48px; opacity: 1;
+  }
+
+  ion-input{
+    font-weight: 600;
+  }
+  ion-textarea{
+    font-weight: 600;
+  }
+}
+
+
+
+ion-footer{
+  ion-button.md{
+    font-weight:600; height: 48px;
+  }
+  ion-button.ios{
+    font-weight:600; height: 48px; opacity: 1;
+  }
+}
+
+ion-item-divider{
+   min-height: 10px;
+}
+
+
+
+.about{
+  ion-segment{
+    --indicator-box-shadow: transparent !important;
+    --background:transparent;
+  }
+  ion-segment-button.ios{
+    margin: 0px 1px;
+    min-width: auto;
+    min-height: auto;
+    text-transform: capitalize;
+  
+    --color: #000000;
+    --background: #ffffff;
+    --background-checked: #ffffff;
+    --color-checked: #FF0000;
+    --indicator-color: transparent!important;
+    --border-color: transparent !important;
+    --indicator-box-shadow: none;
+      // border:1px solid #DBDBDB;
+  
+    ion-label{
+      padding: 5px 2px;
+      font-size:15px;
+      font-weight:800;
+      letter-spacing: 0.3px;
+      font-family: Ubuntu600;
+    }
+  }
+  
+  ion-segment-button.md{
+    margin: 0px 1px;
+    min-width: auto;
+    min-height: auto;
+    text-transform: capitalize;
+  
+    --color: #000000;
+    --background: #ffffff;
+    --background-checked: #ffffff;
+    --color-checked: #FF0000;
+    --indicator-color: transparent!important;
+    --border-color: transparent !important;
+    --indicator-box-shadow: none;
+      // border:1px solid #DBDBDB;
+      border-radius: 8px;
+  
+    ion-label{
+      line-height: 5px;
+      font-size:15px;
+      font-weight:800;
+      letter-spacing: 0.3px;
+      font-family: Ubuntu600;
+    }
+  }
+  ion-segment-button.segment-button-checked{
+    border:0;
+  }
+}
+
+
+
+.my-journey-seg{
+    align-items: center;
+    --indicator-box-shadow: transparent;
+    --background: transparent;
+    background: transparent;
+   
+
+  ion-segment-button.ios{
+    margin-inline: 10px;
+    min-width: auto;
+    min-height: auto;
+    text-transform: capitalize;
+      --background: #ffffff;
+      --background-checked: var(--ion-color-danger);
+      --background-focused: var(--ion-color-danger);
+      --background-hover: var(--ion-color-danger);
+  
+      --border-color: #d3d3d3;
+      // --border-style: solid;
+      --border-width: 0px;
+      --border-radius: 8px;
+      --color:  #333333;
+      --color-checked: #ffffff;
+  
+  
+      --color-focused: #ffffff;
+      --color-hover: #ffffff;
+  
+      --indicator-box-shadow: none;
+      --indicator-color: transparent;
+      --indicator-height: 0px;
+      border:1.2px solid #d3d3d3;
+      font-weight: 800;
+    ion-label{
+      padding: 5px 2px;
+      font-size:15px;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      font-family: Ubuntu600;
+    }
+  }
+  ion-segment-button.segment-button-checked{
+    border:0;
+  }
+}   
+
+
+
+
+
+
+.cust-dt-slides{
+  .swiper-pagination {
+    bottom: -50px !important;
+  }
+  .swiper-pagination-bullet {
+    width: 6px;
+    height: 6px;
+    display: inline-block;
+    border-radius: 100%;
+    opacity: 1
+  }
+  .swiper-pagination-bullet-active {
+    width: 15px;
+    height: 6px;
+    display: inline-block;
+    border-radius: 6px;
+  }
+
+  // --bullet-background: var(--ion-color-step-200, #cccccc);
+  // --bullet-background-active: var(--ion-color-primary, #3880ff);
+  // --progress-bar-background: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.25);
+  // --progress-bar-background-active: var(--ion-color-primary-shade, #3171e0);
+  // --scroll-bar-background: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.1);
+  // --scroll-bar-background-active: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.5);
+} 
+
+.cust-about-slides{
+  .swiper-pagination {
+    bottom: 0px !important;
+  }
+  .swiper-pagination-bullet {
+    width: 6px;
+    height: 6px;
+    display: inline-block;
+    border-radius: 100%;
+    opacity: 1
+  }
+  .swiper-pagination-bullet-active {
+    width: 15px;
+    height: 6px;
+    display: inline-block;
+    border-radius: 6px;
+  }
+
+
+  // --bullet-background: var(--ion-color-step-200, #cccccc);
+  // --bullet-background-active: var(--ion-color-primary, #3880ff);
+  // --progress-bar-background: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.25);
+  // --progress-bar-background-active: var(--ion-color-primary-shade, #3171e0);
+  // --scroll-bar-background: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.1);
+  // --scroll-bar-background-active: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.5);
+} 
+::-webkit-scrollbar {
+  display: none;
+}
+
+
+
+
+
+
+
+// h3{
+//   font-size:18px;
+//   font-weight:600;
+//   color: #424242;
+// }
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Museo800';
+  color: #2A2A2A !important;
+}
+
+h1 {
+  font-size: 22px !important;
+}
+
+h2 {
+  font-size: 20px !important;
+}
+
+h3 {
+  font-size: 18px !important;
+}
+
+h4 {
+  font-size: 16px !important;
+}
+
+h5 {
+  font-size: 16px !important;
+}
+
+h6 {
+  font-size: 16px !important;
+}
+
+// div{
+//   // font-family: 'Ubuntu500 !important';
+// }
+
+.cstm{
+  p{
+    line-height: 1.8 !important;
+  }
+}
+
+p{
+  color: #333333;
+  font-family: 'Ubuntu';
+  font-size: 15px;
+  font-weight: normal;
+  line-height: 1.5;
+}
+
+
+.swiper-slide{
+  flex-direction: column;
+  text-align: left;
+  // border:1px solid red;
+}
+
+// .swiper-container-autoheight, .swiper-container-autoheight .swiper-slide {
+//   height: auto;
+// }
+
+
+.custom-modal {
+  &::part(content) {
+      // box-shadow: 0px 0px 20px 5px rgb(0 0 0 / 32%);
+      // --height: 70%;
+      // --width: 80%;
+      // --border-radius: 16px;
+
+      --border-radius: 20px 20px 0px 0px;
+      --box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  }
+  // &::part(content) {
+  //   border-radius: 20px 20px 0px 0px;
+  //   box-shadow: 0px 0px 20px 5px rgb(0 0 0 / 32%);
+  // }
+  // ion-modal ion-toolbar {
+  //   --background: rgb(14 116 144);
+  //   --color: white;
+  // }
+}
+
+// .song-model{
+//   --height: calc(100% - (var(--ion-safe-area-top) + 0px)) !important;
+//   // &:host{
+//   //   --height: calc(100% - (var(--ion-safe-area-top) + 0px));
+//   // }
+
+   
+//   // :host(.modal-sheet) {
+// }
+
+.modal-sheet.song-modal {
+  --height: 100%;
+}
+
+
+// .toast-subs-button{
+
+//   --color: #FF0000;
+//   color: #FF0000;
+//   .buttons{
+
+//   }
+// }
+
+
+.toast-subs{
+  &::part(button) {
+     --button-color: var(--ion-color-danger);
+     font-weight: 800;
+  }
+}
+// ion-toast::part(button) {
+//   --button-color: var(--ion-color-danger) !important;
+//   --color: var(--ion-color-danger) !important;
+// }
+
+
+ion-rating-stars{
+      ion-icon{
+          opacity: 1 !important;
+      }
+}

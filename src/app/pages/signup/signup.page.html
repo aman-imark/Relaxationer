@@ -1,0 +1,176 @@
+<ion-header  mode="ios" class="ion-no-border">
+  <ion-toolbar style="--background: transparent;">
+      <!-- <ion-buttons slot="start">
+        <ion-back-button text="" defaultHref="/login" style="color: #ffffff;"></ion-back-button>
+      </ion-buttons> -->
+
+      <!-- <div style="display: flex;position:absolute;left:0px;right:0px;top:0px;min-height: 100px;">
+        <div style="width: 60%; margin: auto;text-align:center;"> <img src="assets/logo.png"/> </div>
+      </div>  -->
+  </ion-toolbar>
+</ion-header>
+
+
+<!-- <ion-header mode="ios" [translucent]="true" class="ion-no-border">
+  <ion-toolbar style="--background:transparent;--min-height:100px;">
+    <div style="width: 60%; margin: auto;text-align:center;"> <img src="assets/logo.png"/> </div>
+  </ion-toolbar>
+</ion-header> -->
+
+<!-- <div style="display: flex;position:absolute;left:0px;right:0px;top:0px;min-height: 100px;">
+  <div style="width: 60%; margin: auto;text-align:center;"> <img src="assets/logo.png"/> </div>
+</div> -->
+
+
+
+
+<ion-content  [fullscreen]="true"
+              style="--background: url('assets/login_background.png')  no-repeat center center fixed;">
+
+
+  <!-- <ion-header  #header class="ion-no-border">
+    <ion-toolbar style="--background: transparent;--min-height:100px;">
+        <ion-buttons slot="start">
+          <ion-back-button text="" defaultHref="/login" style="color: #ffffff;"></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+  </ion-header> -->
+
+
+
+  <ion-toolbar style="--background:transparent;">
+    <div style="width: 60%; margin: auto;text-align:center;"> <img src="assets/logo.png"/> </div>
+  </ion-toolbar>
+
+
+
+
+<div style="position:relative;">
+    <div>
+      <h1 style="color:#ffffff !important;text-align: center;">SIGN UP</h1><br>
+      <div style="width:92%; margin:auto;">
+        <div style="margin: 20px 0px 20px;">
+          <ion-button  mode="md" shape="round" expand="block" style="--background:#4867AA;text-transform: initial;">
+            <ion-icon slot="start" name="logo-facebook"  style="font-size:1.6em;"></ion-icon>
+            <ion-text style="font-size:16px;letter-spacing: normal;">&nbsp;Sign in with Facebook</ion-text>
+          </ion-button>
+        </div>
+        <div>
+          <ion-button  mode="md" shape="round" expand="block" style="--background:#D94D2E;text-transform: initial;" (click)="googleLogin()">
+            <ion-icon slot="start" name="logo-google"  style="font-size:1.6em;"></ion-icon>
+            <ion-text style="font-size:16px;letter-spacing: normal;">&nbsp;Sign in with Google</ion-text>
+          </ion-button>
+        </div>
+      </div>  <br><br>
+
+
+      <div style="opacity: 1;">  <!-- margin: 30px 2px 30px 2px; -->
+        <div style="display:flex; justify-content: center; width:90%; margin:auto; position: relative;top: 0px;">
+           <div style="border-bottom: 1.2px solid #717171; width:28%; position: relative;top: -8px;"></div>
+           <div style="width:80px;text-align:center;color:#ffffff; width:42%;font-size:14px;font-weight:800;">OR WITH E-MAIL</div>
+           <div style="border-bottom: 1.2px solid #717171; width:28%; position: relative;top: -8px;"></div>
+        </div>
+      </div>  <br><br>
+
+
+
+      <div style="width:92%;margin:auto;">
+      <form [formGroup]="signupForm"  (ngSubmit)="user_signup()">
+          <ion-grid>
+            <ion-row style="width:100%;color: #ffffff;align-items: center;">
+              <ion-col size="12">
+                <ion-item mode="md" lines="full" style="position:relative;--background:transparent;--color:#ffffff;--padding-start:0px;--inner-padding-end:0px;
+                                                 --border-color: var(--ion-item-border-color, var(--ion-border-color, var(--ion-color-step-150, rgba(255, 255, 255, 0.72))));">
+                  <ion-icon name="person-outline" class="ion-padding-end" style="font-size: 22px;color:#fff;"></ion-icon>
+                  <ion-input type="text" minlength="4" placeholder="Full Name"  name="name" formControlName="name" requird></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="12" >
+                <div *ngIf="(signupForm.get('name').touched || submitted) &&  signupForm.get('name').hasError('required')"  class="text-danger">Name is required.</div>
+                <div *ngIf="(signupForm.get('name').touched || submitted) &&  signupForm.get('name').hasError('minlength')"  class="text-danger">Name must be at least 4 characters long.</div>
+              </ion-col>
+            </ion-row> <br> 
+
+            <ion-row style="width:100%;color: #ffffff;align-items: center;">
+              <ion-col size="12">
+                <ion-item mode="md" lines="full" style="position:relative;--background:transparent;--color:#ffffff;--padding-start:0px;--inner-padding-end:0px;
+                                                 --border-color: var(--ion-item-border-color, var(--ion-border-color, var(--ion-color-step-150, rgba(255, 255, 255, 0.72))));">
+                  <ion-icon name="mail-outline" class="ion-padding-end" style="font-size: 22px;color:#fff;"></ion-icon>
+                  <ion-input type="email"  placeholder="Email Address"  name="email" formControlName="email" requird></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="12">
+                 <div *ngIf="(signupForm.get('email').touched || submitted) &&  signupForm.get('email').hasError('required')"  class="text-danger">Email address is required.</div>
+                 <div *ngIf="(signupForm.get('email').touched || submitted) &&  signupForm.get('email').hasError('email')"  class="text-danger">Email address must be valid.</div>
+              </ion-col>
+            </ion-row> <br> 
+
+            <ion-row style="width:100%;color: #ffffff;align-items: center;">
+              <ion-col size="12">
+                <ion-item mode="md" lines="full" style="position:relative;--background:transparent;--color:#ffffff;--padding-start:0px;--inner-padding-end:0px;
+                                                 --border-color: var(--ion-item-border-color, var(--ion-border-color, var(--ion-color-step-150, rgba(255, 255, 255, 0.72))));">
+                  <ion-icon name="mail-outline" class="ion-padding-end" style="font-size: 22px;color:#fff;"></ion-icon>
+                  <ion-input type="password" minlength="8" placeholder="Password"  name="password" formControlName="password" requird></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="12">
+                 <div *ngIf="(signupForm.get('password').touched || submitted) &&  signupForm.get('password').hasError('required')"  class="text-danger">Password is required.</div>
+                 <div *ngIf="(signupForm.get('password').touched || submitted) &&  signupForm.get('password').hasError('minlength')"  class="text-danger">Password should be more than 6 character.</div>
+              </ion-col> 
+            </ion-row> <br>
+
+            <ion-row style="width:100%;color: #ffffff;align-items: center;">
+              <ion-col size="12">
+                <ion-item mode="md" lines="full" style="position:relative;--background:transparent;--color:#ffffff;--padding-start:0px;--inner-padding-end:0px;
+                                                 --border-color: var(--ion-item-border-color, var(--ion-border-color, var(--ion-color-step-150, rgba(255, 255, 255, 0.72))));">
+                  <ion-icon name="mail-outline" class="ion-padding-end" style="font-size: 22px;color:#fff;"></ion-icon>
+                  <ion-input type="password" placeholder="Confirm Password"  name="password_confirmation" formControlName="password_confirmation" requird></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="12">
+                 <div *ngIf="(signupForm.get('password_confirmation').touched || submitted) &&  signupForm.get('password_confirmation').hasError('required')"  class="text-danger">Confirm Password is required.</div>
+                 <div *ngIf="signupForm.get('password_confirmation').errors?.['confirmPasswordValidator']" class="text-danger">Passsword and Confirm Password didn't match. </div>
+              </ion-col>
+            
+
+            </ion-row> <br>
+
+            <!-- <ion-row style="width:100%;color: #ffffff;align-items: center;">
+              <ion-col size="1"  style="align-items: center;">
+               <ion-icon name="gift-outline"  style="font-size: 22px;"></ion-icon>
+              </ion-col>
+              <ion-col size="11" style="align-items: center;">
+                <ion-item lines="none" style="position:relative;--background:transparent;--color:#ffffff;    font-weight: 600;">
+                  <ion-label button>Gift Card Code</ion-label>
+                </ion-item>
+              </ion-col>
+            </ion-row> -->
+
+            <ion-row style="width:100%;color: #ffffff;align-items: center;">
+              <ion-col size="0.8" style="align-items: center;">
+                <ion-checkbox color="danger" style="margin-inline-end: 15px !important;--border-width: 1px;" 
+                              name="termsCheck" formControlName="termsCheck" requird></ion-checkbox>
+              </ion-col>
+              <ion-col size="11.2" style="align-items: center;">
+                <ion-item lines="none" style="position:relative;--background:transparent;--color:#ffffff; font-weight: 600;">
+                  <ion-label style="white-space: normal;font-size:14px;line-height: 1.6;"><span>By signing up, you agree to Relaxationer</span>&nbsp;
+                    <span style="color:#fe0a0a;font-weight:800;" [routerLink]="['/privacy']">Privacy Policy</span> 
+                    <span> and </span> <span style="color:#fe0a0a;font-weight:800;" [routerLink]="['/terms']">Terms and Conditions</span></ion-label>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-grid><br><br>
+
+          <div>
+            <ion-button mode="md" type="submit" shape="round" expand="block" style="--background:#FF0000;font-size:16px;text-transform: initial;">Sign Up</ion-button><br>
+          </div>
+      </form>
+      <ion-item mode="md"  style="position:relative;--background:transparent;--color:#ffffff;" (click)="goto_login()">
+        <ion-label class="ion-text-center"><span style="font-weight:500;">Already have an account?</span>&nbsp;<span style="color:#fe0a0a;font-weight:800;">Log in</span></ion-label>
+      </ion-item><br>
+
+
+      </div>
+    </div>
+</div>
+</ion-content>

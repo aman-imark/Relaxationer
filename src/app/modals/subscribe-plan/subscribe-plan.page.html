@@ -1,0 +1,168 @@
+<ion-content  class="ion-padding" style="--background: url('assets/login_background.png');">
+
+  <div style="display:flex; justify-content: right; position: fixed;left:0px;top:0px;right:0px;z-index: 20;">
+    <ion-buttons class="cust-close">
+      <ion-button class="cust-close" shape="round" (click)="dismiss()">
+        <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </div>
+
+  <ion-toolbar>
+    <ion-title  class="ion-text-center" style="font-weight:800;">Subscription Plan</ion-title><br>
+    <div style="text-align:center;"> <ion-label>Unlock all the Journey of Relaxationer</ion-label> </div>
+  </ion-toolbar> <br>
+  
+
+
+
+  <div style="color:#ffffff;"> 
+  <div style="text-align:center;">
+    <ion-label><p  style="color: #ffffff;">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p></ion-label>
+  </div>
+  </div><br><br>
+
+  
+  <ion-slides  pager="true" [options]="slideOpts" style="overflow: visible;">
+    <ion-slide  style="height: 500px;background: #ffffff;color:#333333;border:4px solid #4fb1ea; border-radius: 25px;">  
+    <div>
+      <div>
+        <div style="height:250px;"><img  src="assets/subs/1.png" style="width: 100%; object-fit: cover;"></div>
+      </div>
+      <div>
+        <ion-label>
+          <h4 style="color:#4fb1ea;font-weight:800;font-size:20px;">monthly</h4>  <br><br>
+          <p>Get a 7-day RELAXATIONER meditation for free.</p> 
+        </ion-label>
+      </div><br>
+      <div>
+        <ion-button mode="md" type="button" shape="round" style="--background:#4fb1ea;">Get Monthly</ion-button>
+      </div>
+    </div>  
+    </ion-slide>  
+  
+    <ion-slide  style="height: 500px;background: #ffffff;color:#333333;border:4px solid #f40a0b; border-radius: 25px;">
+    <div> 
+      <div>
+        <div style="height:250px;"><img  src="assets/subs/2.png" style="width: 100%; object-fit: cover;"></div>
+      </div>
+      <div>
+        <ion-label>
+          <h4 style="color:#f40a0b;font-weight:800;font-size:20px;">yearly</h4>  <br><br>
+          <p>Start with the cheapest option today.</p>
+          <p>Payment is made in one lump €106,56</p>
+        </ion-label>
+      </div><br>
+      <div>
+        <ion-button mode="md" type="button" shape="round" style="--background:#f40a0b;">Get Yearly</ion-button>
+      </div>
+    </div> 
+    </ion-slide>
+
+    <ion-slide  style="height: 500px;background: #ffffff;color:#333333;border:4px solid #530861; border-radius: 25px;">
+    <div> 
+      <div>
+        <div style="height:250px;"><img  src="assets/subs/3.png" style="width: 100%; object-fit: cover;"></div>
+      </div>
+      <div>
+        <ion-label>
+          <h4 style="color:#530861;font-weight:800;font-size:20px;">Best offer</h4> <br><br>
+          <p>It was only billed once.</p>
+          <p>Use for the rest of your life.</p>
+        </ion-label>
+      </div><br>
+      <div>
+        <ion-button mode="md" type="button" shape="round" style="--background:#530861;">Get Lifetime</ion-button>
+      </div>
+    </div> 
+    </ion-slide> 
+  </ion-slides>
+
+
+
+
+
+
+
+  <!-- <ion-header class="ion-no-border" style="position: fixed;left:0px;right:0px;">
+    <ion-toolbar style="--background: transparent;">
+      <ion-buttons slot="start" style="color:#ffffff">
+        <ion-back-button text="" defaultHref=""></ion-back-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <br><br> -->
+
+  <!-- <div style=" margin: 0px 10px;">
+    <h4 style="text-transform: uppercase;text-align: center;font-weight: 800;color:#ffffff;">UNLOCK ALL THE JOURNEY OF RELAXATIONER</h4><br>
+    <div style="color:#ffffff;">
+      <ion-row>
+        <ion-col size="1.5"><ion-icon style="font-size: 30px;" name="checkmark-circle-outline"></ion-icon></ion-col>
+        <ion-col size="10.5"><div style="font-size:14px;">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="1.5"><ion-icon style="font-size: 30px;" name="checkmark-circle-outline"></ion-icon></ion-col>
+        <ion-col size="10.5"><div style="font-size:14px;">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="1.5"><ion-icon style="font-size: 30px;" name="checkmark-circle-outline"></ion-icon></ion-col>
+        <ion-col size="10.5"><div style="font-size:14px;">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="1.5"><ion-icon style="font-size: 30px;" name="checkmark-circle-outline"></ion-icon></ion-col>
+        <ion-col size="10.5"><div style="font-size:14px;">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</div>
+        </ion-col>
+      </ion-row>
+    </div><br><br>
+
+    <div>
+    <ion-slides  pager="true" [options]="slideOpts" style="overflow: visible;">
+      <ion-slide  style="height: 600px;background: #ffffff;color:#333333;border:4px solid #4fb1ea; border-radius: 25px;">  
+      <div>
+        <div>
+          <div style="height:250px;"><img  src="assets/subs/1.png" style="width: 80%; height: 80%;object-fit: cover;"></div>
+        </div>
+        <div>
+          <h4 style="color:#4fb1ea;font-weight:800;">monthly</h4> 
+          <p>Get a 7-day RELAXATIONER meditation for free.</p> 
+
+        </div><br><br> 
+      </div>  
+      </ion-slide>  
+    
+      <ion-slide  style="height: 600px;background: #ffffff;color:#333333;border:4px solid #f40a0b; border-radius: 25px;">
+      <div> 
+        <div>
+          <div style="height:250px;"><img  src="assets/subs/2.png" style="width: 80%; height: 80%;object-fit: cover;"></div>
+        </div>
+        <h4 style="color:#f40a0b;font-weight:800;">yearly</h4>  
+        <p>Start with the cheapest option today.</p>
+        <p>Payment is made in one lump €106,56</p>
+      </div> 
+      </ion-slide>
+
+      <ion-slide  style="height: 600px;background: #ffffff;color:#333333;border:4px solid #530861; border-radius: 25px;">
+      <div> 
+        <div>
+          <div style="height:250px;"><img  src="assets/subs/3.png" style="width: 80%; height: 80%;object-fit: cover;"></div>
+        </div>
+        <h4 style="color:#530861;font-weight:800;">Best offer</h4>  
+        <p>It was only billed once.</p>
+        <p>Use for the rest of your life.</p>
+      </div> 
+      </ion-slide> 
+    </ion-slides>
+    </div>
+
+    <div style="text-align:center;color:#ffffff;"><br>
+      <h4 style="text-transform: uppercase;text-align: center;font-weight: 800;">Subscription Terms</h4>
+      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the odit the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type the specimen book. It has survived not only five amed centuries, but also the leap into electronic at text typesetting, sed remaining essentially unchanged.</p>
+      <p>Privacy Policy & Terms and Conditions</p>
+      <br>
+    </div>
+
+  </div> -->
+</ion-content>

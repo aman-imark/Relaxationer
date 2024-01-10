@@ -1,0 +1,124 @@
+<ion-header>
+  <ion-toolbar >
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="/maintabs/tabs/tab1"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-start">Favourite Tracks</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+  <ion-refresher mode="md" slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-grid class="sec-3" *ngIf="(!userWishlistData)">
+    <ion-row>
+      <ion-col size="6">
+        <ion-card mode="ios"  style="height:140px;">
+           <ion-skeleton-text animated style="height: 140px;width: 100%;margin:0px;padding:0px;"></ion-skeleton-text>
+        </ion-card>
+      </ion-col>
+  
+      <ion-col size="6">
+        <ion-card mode="ios"  style="height:140px;">
+           <ion-skeleton-text animated style="height: 140px;width: 100%;margin:0px;padding:0px;"></ion-skeleton-text>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="6">
+        <ion-card mode="ios"  style="height:140px;">
+           <ion-skeleton-text animated style="height: 140px;width: 100%;margin:0px;padding:0px;"></ion-skeleton-text>
+        </ion-card>
+      </ion-col>
+  
+      <ion-col size="6">
+        <ion-card mode="ios"  style="height:140px;">
+           <ion-skeleton-text animated style="height: 140px;width: 100%;margin:0px;padding:0px;"></ion-skeleton-text>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="6">
+        <ion-card mode="ios"  style="height:140px;">
+           <ion-skeleton-text animated style="height: 140px;width: 100%;margin:0px;padding:0px;"></ion-skeleton-text>
+        </ion-card>
+      </ion-col>
+  
+      <ion-col size="6">
+        <ion-card mode="ios"  style="height:140px;">
+           <ion-skeleton-text animated style="height: 140px;width: 100%;margin:0px;padding:0px;"></ion-skeleton-text>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="6">
+        <ion-card mode="ios"  style="height:140px;">
+           <ion-skeleton-text animated style="height: 140px;width: 100%;margin:0px;padding:0px;"></ion-skeleton-text>
+        </ion-card>
+      </ion-col>
+  
+      <ion-col size="6">
+        <ion-card mode="ios"  style="height:140px;">
+           <ion-skeleton-text animated style="height: 140px;width: 100%;margin:0px;padding:0px;"></ion-skeleton-text>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+
+  <div *ngIf="(userWishlistData?.length === 0)" style="display:flex;align-items: center;justify-content: center;height:100%;font-weight:600;color: #666666;">
+    No Records Found!
+  </div>
+ 
+
+  <ion-grid  *ngIf="(userWishlistData?.length >= 1)">
+    <ion-row>
+      <ion-col size="6" *ngFor="let ptd of userWishlistData; index as s">
+        <ion-card mode="ios">
+          <div style="height: 150px; width: 100%;position:relative;top:0px;right:0px;left:0px;bottom:0px;">
+          <img [src]="base_url+'/'+ptd.image" style="height: 100%; width: 100%;object-fit: cover;">
+          <div style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);">
+            <ion-icon  name="play-circle-outline" class="play-button"></ion-icon>
+          </div>
+          <div *ngIf="(ptd.type === 'free')" style="position: absolute;top: 72%;left: 50%;transform: translate(-50%, -50%);">
+            <ion-chip mode="ios" style="background:#ff000070;height:25px !important;justify-content: center;"><small style="font-weight:600;color:#fff;">Free</small></ion-chip>
+          </div>
+          <div *ngIf="(ptd.type === 'paid' && userPlan)" style="position: absolute;top: 72%;left: 50%;transform: translate(-50%, -50%);">
+            <ion-chip mode="ios" style="background:#1959ffb8;height:25px !important;justify-content: center;"><small style="font-weight:600;color:#fff;">Play</small></ion-chip>
+          </div>
+          <div style="position: absolute; top: 6px; right: 6px;">
+            <ion-buttons>
+              <ion-button class="cust-save" shape="round" (click)="removeFrom_Wishlist(ptd.id)">
+                <ion-icon slot="icon-only" name="heart"></ion-icon>
+              </ion-button> 
+            </ion-buttons>
+          </div>
+          <div  *ngIf="(!userPlan && (ptd.type === 'paid'))" style="position: absolute; top: 42px; right: 6px;">
+            <ion-buttons>
+              <ion-button class="cust-lock" shape="round">
+                <ion-icon slot="icon-only" name="lock-closed-outline"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+          </div>
+          </div>
+        </ion-card>
+        <ion-item lines="none" detail="false">
+          <ion-label style="margin: 0px 0px 15px;" (click)="goto_journeyDetailPage2(ptd.journey_id, ptd.id)">
+            <h4 *ngIf="(ptd.title)">{{s+1}}. {{ptd.title}}</h4>
+            <p *ngIf="(ptd.audio_time)" class="ion-padding-horizontal">{{ptd.audio_time}} Min.</p>
+        
+            <h4 *ngIf="(!ptd.title)">Unknown</h4>
+            <p *ngIf="(!ptd.audio_time)" class="ion-padding-horizontal">00.00 Min.</p>
+          </ion-label>
+        </ion-item>        
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+</ion-content>

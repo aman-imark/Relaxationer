@@ -1,0 +1,52 @@
+.my-journey-seg ion-segment-button.ios{
+    min-height: 32px !important;
+    max-height: 32px;
+}
+
+
+// .segBtn-journey.md{
+//     min-height: 25px;
+//     border-radius: 6px;
+//     ion-label{
+//         margin-top: 5px;
+//         margin-bottom: 5px;
+//     }
+   
+// }
+
+// .segBtn-journey.ios{
+//     min-height: 36px;
+//     min-width: 20px;
+//     border-radius: 6px;
+// }
+
+
+ion-content .scroll { height: 100%; }
+
+.limitTextHeight {
+    height: 58px;
+    overflow: hidden;
+}
+
+
+.load-seg{
+    margin-inline:20px;
+    ion-skeleton-text{
+        width:100px;
+        height:40px;
+        border-radius: 8px;;
+    }
+}
+
+.my-overlay{
+    width: 100%;
+    position: absolute;
+    z-index: 99;
+    bottom: 0px;
+    background: #0c0c0c80;
+    color: #fff;
+    padding:4px 10px;
+    h3{
+        color:#fff !important;
+    }
+}

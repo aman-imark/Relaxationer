@@ -1,0 +1,137 @@
+<ion-header>
+  <ion-toolbar >
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="/maintabs/tabs/tab1"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-start">Payment</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content>
+<br>
+
+<!-- this.pay_plan_type = params.plan_type;
+this.pay_plan_id = params.plan_id;
+this.pay_plan_title = params.plan_title;
+this.pay_amount = params.amount;
+this.pay_subs_type = params.subs_type;
+this.pay_fname = params.fname;
+this.pay_femail = params.femail; -->
+
+
+  <div *ngIf="(successCard === false)">
+    <div class="ion-padding" *ngIf="pay_amount">
+      <ion-row style="width:100%;align-items: center;">
+        <ion-col size="5">
+           <ion-text *ngIf="(pay_plan_type === 'subs')" style="color:#5b5b59">Subscription Plan</ion-text>
+           <ion-text *ngIf="(pay_plan_type === 'gift')" style="color:#5b5b59">Gift Card Plan</ion-text>
+        </ion-col>
+        <ion-col size="1"><ion-text style="color:#5b5b59">:</ion-text></ion-col>
+        <ion-col size="6">
+           <ion-text *ngIf="(pay_plan_type === 'subs' && pay_subs_type === 'monthly')" style="font-size: 20px;text-transform: capitalize;color:#4fb1ea;">{{pay_subs_type}}</ion-text>
+           <ion-text *ngIf="(pay_plan_type === 'subs' && pay_subs_type === 'yearly')" style="font-size: 20px;text-transform: capitalize;color:#f40a0b;">{{pay_subs_type}}</ion-text>
+           <ion-text *ngIf="(pay_plan_type === 'subs' && pay_subs_type === 'lifetime')" style="font-size: 20px;text-transform: capitalize;color:#530861;">{{pay_subs_type}}</ion-text>
+           <ion-text *ngIf="(pay_plan_type === 'gift')" color="dark" style="font-size: 20px;text-transform: capitalize;">{{pay_subs_type}}</ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row style="width:100%;align-items: center;margin-top: 10px;">
+        <ion-col size="5" style="display: inline-flex; align-items: center;">
+           <ion-text style="color:#5b5b59;text-align: center;">Total Amount</ion-text>
+        </ion-col>
+        <ion-col size="1"><ion-text style="color:#5b5b59;">:</ion-text></ion-col>
+        <ion-col size="6" style="display: inline-flex; align-items: center;padding-inline-start: 0px;padding-inline-end: 0px;">
+           <ion-icon name="logo-usd"  style="font-size:26px;color: #3d3d3d;"></ion-icon>
+           <ion-text style="font-size: 26px;color: #3d3d3d;letter-spacing: normal;">{{pay_amount}}</ion-text>
+        </ion-col>
+      </ion-row><br>
+    </div>
+
+    <ion-card mode="ios" class="ion-no-padding">
+    <ion-card-content mode="ios"  class="ion-no-padding" style="padding:4%;">
+      <form [formGroup]="cardPayForm">
+        <ion-grid>
+        <!-- <ion-grid>
+          <ion-radio-group value="My Friend">
+            <div style="text-align:center;">
+              <h3>Your order will be sent to:</h3>
+              <div style="display: flex; justify-content: center; align-items: stretch; padding: 10px 0px;">
+                <div style="font-size:14px;font-weight:600;">My Friend</div> &nbsp;&nbsp;
+                <div><ion-radio mode="md" value="My Friend"></ion-radio></div>
+              </div>
+            </div>
+          </ion-radio-group>
+          <br> -->
+          <ion-row style="width:100%;height:auto;color: #000000;align-items: center;">
+             <ion-col size="12">
+              <ion-item lines="full" style="position:relative;--color:#4f4f4f;--padding-start: 0px;--inner-padding-end: 0px;">
+                <ion-input type="tel" maxlength="16" formControlName="number" (ionInput)="countChange($event)" 
+                 placeholder="Card Number*"  name="number"  requird  style="font-size: 14px;"></ion-input>
+              </ion-item>
+              <div *ngIf="(cardPayForm.get('number').touched || submitted) &&  cardPayForm.get('number').hasError('required')"  class="text-danger">Card number is required!</div>
+              <div *ngIf="(cardPayForm.get('number').touched || submitted) &&  cardPayForm.get('number').hasError('minlength')"  class="text-danger">16 digit card number is required!</div>
+             </ion-col>
+          </ion-row> <br>
+
+          <ion-row style="width:100%;height:auto;color: #000000;align-items: center;">
+            <ion-col size="12">
+             <ion-item lines="full" style="position:relative;--color:#4f4f4f;--padding-start: 0px;--inner-padding-end: 0px;">
+               <ion-input type="text"  placeholder="Name on Card*"  formControlName="name" requird style="font-size: 14px;"></ion-input>
+             </ion-item>
+             <div *ngIf="(cardPayForm.get('name').touched || submitted) &&  cardPayForm.get('name').hasError('required')"  class="text-danger">Name is required.</div>
+             <div *ngIf="(cardPayForm.get('name').touched || submitted) &&  cardPayForm.get('name').hasError('minlength')"  class="text-danger">Name should be more than 4 character.</div>
+            </ion-col>
+
+
+          </ion-row> <br>
+
+          <ion-row style="width:100%;height:auto;color: #000000;align-items: baseline;">
+            <ion-col size="5.5">
+             <ion-item lines="full" style="position:relative;--color:#4f4f4f;--padding-start: 0px;--inner-padding-end: 0px;">
+               <ion-input type="password" minlength="3" maxlength="4" placeholder="CVC*"  formControlName="cvc"  name="cvc" requird style="font-size: 14px;"></ion-input>
+               <!-- <div *ngIf="(cardPayForm.get('cvc').touched || submitted) &&  cardPayForm.get('cvc').hasError('required')"  class="text-danger">required!</div>
+               <div *ngIf="(cardPayForm.get('cvc').touched || submitted) &&  cardPayForm.get('cvc').hasError('minlength')"  class="text-danger">min length!</div> -->
+             </ion-item>
+              <div *ngIf="(cardPayForm.get('cvc').touched || submitted) &&  cardPayForm.get('cvc').hasError('required')"  class="text-danger">required!</div>
+              <div *ngIf="(cardPayForm.get('cvc').touched || submitted) &&  cardPayForm.get('cvc').hasError('minlength')"  class="text-danger">min length!</div>
+            </ion-col>
+            <ion-col size="1"></ion-col>
+            <ion-col size="5.5">
+              <ion-item lines="full" style="position:relative;--color:#4f4f4f;--padding-start: 0px;--inner-padding-end: 0px;"  (click)="openThroghMY_Modal()">
+                <ion-input type="text" readonly placeholder="Month/Year*"  [value]="through_dateValue" style="font-size: 14px;"></ion-input>
+                <ion-input type="text" formControlName="expMonth" [value]="card_exp_month"  hidden></ion-input>
+                <ion-input type="text" formControlName="expYear" [value]="card_exp_year" hidden></ion-input>
+                <!-- <div *ngIf="(cardPayForm.get('expYear').touched || submitted) &&  cardPayForm.get('expYear').hasError('required')"  class="text-danger">required!</div> -->
+              </ion-item>
+              <div *ngIf="(cardPayForm.get('expYear').touched || submitted) &&  cardPayForm.get('expYear').hasError('required')"  class="text-danger">required!</div>
+             </ion-col>
+          </ion-row> 
+        </ion-grid>
+      </form>
+    </ion-card-content>
+    </ion-card>
+  </div>
+
+
+  <ion-card  *ngIf="(successCard === true)" mode="ios">
+    <ion-card-content mode="ios">
+      <div style="height:200px;width: 100%;text-align:center;">
+        <img src="assets/images/success.png" style="height:100%;">
+      </div>
+    </ion-card-content>
+    <ion-card-header *ngIf="(pay_amount)" style="text-align: center;">
+      <ion-card-title color="dark">Payment Done</ion-card-title>
+      <p>Please check your email for more details, Thanks.({{ today | date }})</p>
+    </ion-card-header><br>
+  </ion-card>
+
+</ion-content>
+
+
+<ion-footer  *ngIf="(successCard === false)" mode="ios">
+  <div class="ion-padding">
+    <ion-button mode="md" expand="block" fill="solid" shape="round" color="danger"  (click)="user_Make_Payment(cardPayForm)">Pay</ion-button>
+  </div>
+  <br>
+</ion-footer>

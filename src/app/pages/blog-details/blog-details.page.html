@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-start">Blog Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content  [fullscreen]="true"  [scrollEvents]="true">
+
+  <div *ngIf="(!blogData)" style="margin:auto;width: 92%;">
+    <div><br>
+      <div style="height: 200px; width: 100%; border-radius:10px;"><ion-skeleton-text animated style="width: 100%"></ion-skeleton-text></div><br>
+      <div style="height: 200px; width: 100%; border-radius:10px;"><ion-skeleton-text animated style="width: 100%"></ion-skeleton-text></div><br>
+      <div style="height: 25px; width: 85%; border-radius:4px;margin-bottom:20px;"><ion-skeleton-text animated style="width: 100%"></ion-skeleton-text></div>
+      <div style="height: 15px; width: 85%; border-radius:4px;margin-bottom:10px;"><ion-skeleton-text animated style="width: 100%"></ion-skeleton-text></div>
+      <div style="height: 15px; width: 75%; border-radius:4px;margin-bottom:10px;"><ion-skeleton-text animated style="width: 100%"></ion-skeleton-text></div>
+      <div style="height: 15px; width: 45%; border-radius:4px;margin-bottom:10px;"><ion-skeleton-text animated style="width: 100%"></ion-skeleton-text></div>
+      <ion-item-divider mode="ios"></ion-item-divider>
+      <br>
+    </div>
+  </div>
+
+
+
+  <div *ngIf="(blogData)">
+    <div><br>
+        <div class="ion-padding-horizontal" style=" height: 210px; width: 100%;">
+          <img [src]="base_url+'/'+blogData?.image" style="height:100%;width: 100%; border-radius:15px; object-fit:cover;">
+        </div><br>
+        <div class="ion-padding-horizontal">
+          <h3 style="margin: 0px 0px 5%;">{{blogData?.title}}</h3>
+          <p [innerHtml]="blogData?.description"></p>  
+        </div>
+        <ion-item-divider mode="ios"></ion-item-divider>
+    </div>
+  </div>
+
+
+  <div><br>
+    <ion-item  lines="none" detail="false" style="--detail-icon-opacity:0.5;">
+      <h3 slot="start">Related Blogs</h3>
+    </ion-item>
+
+    <div *ngIf="related_blog?.length === 0" style="text-align:center;"><br>
+      <h4 style="color:#666666 !important;;">No Result found!</h4><br>
+    </div>
+
+  
+    <div *ngIf="(related_blog)" style="display:flex;overflow:scroll;margin:12px 0px;">
+      <div  *ngFor="let rld  of related_blog | slice : 0: 6" class="rld-main" (click)="goto_blogDetails(rld?.id)">
+          <div class="rld-img">
+             <img style="width: 100%;" [src]="base_url+'/'+rld?.image"  onError="this.src='assets/no_img.jpeg'">
+          </div>
+          <div class="rld-text">
+            <div claas="rld-title" style="color: #2A2A2A;font-size:16px;font-weight:600;overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; line-height: 20px; max-height: 40px; -webkit-box-orient: vertical; margin: 2px 0px 4px;">{{rld?.title}}</div>
+         </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

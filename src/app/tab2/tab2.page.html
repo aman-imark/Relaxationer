@@ -1,0 +1,290 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar style="--background:transparent; position: absolute;">
+  </ion-toolbar>
+</ion-header> 
+
+
+
+<ion-content [fullscreen]="true">
+
+  <ion-refresher mode="md" slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+
+
+
+<div class="main">
+  <div class="sec-1"  style="height:200px;position:relative;top:0px;">
+      <div *ngIf="(!get_userData?.avatar)">
+        <div style="height:160px; width:100%;"> <ion-skeleton-text animated></ion-skeleton-text> </div>
+        <div style="position: absolute;bottom: 0px;align-items: center;margin: auto;width: 100%;">
+            <ion-skeleton-text animated style="position:relative;width: 90px;height: 90px;border-radius: 50%;border: 4px solid #ffffff;margin: auto;text-align: center;"></ion-skeleton-text>
+        </div>
+      </div>
+  
+      <div *ngIf="(get_userData?.avatar)">
+        <div style="height:160px; width:100%; background: linear-gradient(92deg, #989aa2, #07ADEB) !important;"> <img style="height:100%;width:100%;" src="assets/images/Group 902@3x.png"></div>
+        <div style="position: absolute;bottom: 0px;align-items: center;margin: auto;width: 100%;">
+           <div  style="position:relative;width: 90px;height: 90px;background: #f5f5f5;border-radius: 50%;z-index:2;border: 4px solid #ffffff;margin: auto;text-align: center;">
+              <img [src]="get_userData?.avatar"  onError="this.src='assets/no_user.jpeg'" alt="Profile Image"
+                   style="height:100%;width:100%;border-radius:50%; object-fit: cover;">  
+              <div style="position: absolute;z-index:5;top: -4%;right: -20%;">
+                <ion-buttons style="height: 30px; width: 30px; border-radius: 100%; background: #FF0000;">
+                  <ion-button class="cust-icon-pencil" shape="round" (click)="goto_updateProfile()">
+                    <ion-icon slot="icon-only" name="pencil"  style="color:#fff;font-size: 20px;"></ion-icon>
+                  </ion-button>
+                </ion-buttons>
+              </div>
+           </div>
+        </div>
+      </div>
+  </div>
+
+
+
+  <div class="sec-2"> <br>
+    <ion-toolbar  *ngIf="(!get_userData)" style="padding:0px 10px;">
+      <ion-buttons slot="start">
+        <ion-button>
+          <ion-icon color="medium" slot="icon-only" name="heart"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+        <ion-button>
+          <ion-icon color="medium" slot="icon-only" name="notifications"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title><ion-skeleton-text animated style="height:28px;width:50%;border-radius: 10px;margin:auto;"></ion-skeleton-text></ion-title>
+    </ion-toolbar>
+    <ion-toolbar  *ngIf="(get_userData)" style="--min-height:70px;--background:#fff;padding:0px 10px;">
+      <ion-buttons slot="start">
+        <ion-button (click)="goto_wishlist()" color="danger">
+          <ion-icon slot="icon-only" name="heart-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+        <ion-button (click)="goto_notification()"  color="danger">
+          <ion-icon slot="icon-only" name="notifications-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title style="text-align: center;font-weight:800;">{{get_userData?.name}}</ion-title>
+    </ion-toolbar>  <br>
+  </div>
+
+  <!-- <div style="text-align:center;">Login type is :{{user_login_type}}</div> -->
+
+
+
+  <ion-grid class="sec-3" *ngIf="(!get_userData)">
+    <ion-row>
+      <ion-col size="6">
+        <ion-card mode="ios"  style="height:120px;">
+           <ion-skeleton-text animated style="height: 120px;width: 100%;margin:0px;padding:0px;"></ion-skeleton-text>
+        </ion-card>
+      </ion-col>
+  
+      <ion-col size="6">
+        <ion-card mode="ios"  style="height:120px;">
+           <ion-skeleton-text animated style="height: 120px;width: 100%;margin:0px;padding:0px;"></ion-skeleton-text>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+
+  <ion-grid class="sec-3"  *ngIf="(get_userData)">
+    <ion-row>
+      <ion-col size="6">
+        <ion-card mode="ios"  style="--background:#fef7f7">
+          <ion-card-header style="text-align:center;padding-inline:10px;">
+            <ion-card-title  *ngIf="(!dayStreakCount)" style="color:#FF3C3C">0</ion-card-title>
+            <ion-card-title  *ngIf="(dayStreakCount)" style="color:#FF3C3C">{{dayStreakCount}}</ion-card-title>
+            <ion-card-subtitle style="text-transform: capitalize;">Current Day Streak</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+  
+      <ion-col size="6">
+        <ion-card mode="ios"  style="--background:#fef7f7">
+          <ion-card-header style="text-align:center;padding-inline:10px;">
+            <ion-card-title  *ngIf="(!totalSessionCount)" style="color:#FF3C3C">0</ion-card-title>
+            <ion-card-title  *ngIf="(totalSessionCount)" style="color:#FF3C3C">{{totalSessionCount}}</ion-card-title>
+            <ion-card-subtitle style="text-transform: capitalize;">Total Sessions</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+
+
+
+  <div class="sec-4"> 
+    <div  *ngIf="(!mostPlayedTrackData)"> <br>
+    <ion-toolbar >
+      <ion-title><ion-skeleton-text animated style="height:28px;width:70%;border-radius: 10px;"></ion-skeleton-text></ion-title>
+    </ion-toolbar> <br>
+    </div>
+
+    <ion-grid class="sec-3" *ngIf="(!get_userData)">
+      <ion-row>
+        <ion-col size="6">
+          <ion-card mode="ios"  style="height:120px;">
+             <ion-skeleton-text animated style="height: 120px;width: 100%;margin:0px;padding:0px;"></ion-skeleton-text>
+          </ion-card>
+        </ion-col>
+    
+        <ion-col size="6">
+          <ion-card mode="ios"  style="height:120px;">
+             <ion-skeleton-text animated style="height: 120px;width: 100%;margin:0px;padding:0px;"></ion-skeleton-text>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
+    <div  *ngIf="(mostPlayedTrackData?.length >= 1)"> 
+    <ion-toolbar  style="--min-height:70px;" mode="md">
+      <ion-buttons slot="end">
+        <ion-button>
+          <ion-icon slot="icon-only" name="arrow-redo-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title style="text-align: left;font-weight:800;font-size:16px;">Your Most Played Track</ion-title>
+    </ion-toolbar> 
+    </div>
+  
+    <ion-grid  *ngIf="(mostPlayedTrackData?.length >= 1)">
+      <ion-row  *ngFor="let ptd of mostPlayedTrackData" style="align-items: center;">
+        <ion-col size="6">
+          <ion-card mode="ios" style="margin-bottom: 12px;">
+            <div style="height: 150px; width: 100%;position:relative;top:0px;right:0px;left:0px;bottom:0px;">
+              <img [src]="base_url+'/'+ptd.image" style="height: 100%; width: 100%;object-fit: cover;">
+              <div style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);">
+                <ion-icon  name="play-circle-outline" style="font-size:50px;color:#fff;"></ion-icon>
+              </div>
+              
+            </div>
+          </ion-card>
+          <div *ngIf="(ptd.title)" style="font-weight: 600;font-size: 15px;text-align: center;">{{ptd.title}}</div>
+          <div *ngIf="(ptd.audio_time)" style="font-weight: 600;font-size: 13px;text-align: center;color:#4d4d4d;padding:8px 0px 0px;">{{ptd.audio_time}} min</div>
+          <br *ngIf="(ptd.title)">
+       
+          <div *ngIf="(!ptd.title)" style="font-weight: 600;font-size: 15px;text-align: center;">unknown</div>
+          <br *ngIf="(!ptd.title)">
+          
+        </ion-col>
+        <ion-col size="6">
+          <ion-card mode="ios"  style="--background:#fef7f7">
+            <ion-card-header style="text-align:center;padding-inline:10px;">
+              <ion-card-title  style="color:#FF3C3C">1</ion-card-title>
+              <ion-card-subtitle style="text-transform: capitalize;">Times Listened</ion-card-subtitle>
+            </ion-card-header>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+
+
+
+
+
+
+
+  <div class="sec-5"> 
+    <div *ngIf="(!get_userData)"> <br>
+    <ion-toolbar >
+      <ion-buttons slot="end">
+        <ion-button>
+          <ion-skeleton-text animated style="height:28px;width:100px;border-radius: 10px;"></ion-skeleton-text>
+        </ion-button>
+      </ion-buttons>
+      <ion-title><ion-skeleton-text animated style="height:28px;width:70%;border-radius: 10px;"></ion-skeleton-text></ion-title>
+    </ion-toolbar> <br>
+    </div>
+
+    <div *ngIf="(get_userData?.plan_id === '0')"> <br>
+    <ion-toolbar  style="padding-inline:20px;--min-height:70px;">
+    <!-- <ion-toolbar *ngIf="(get_userData)" style="padding-inline:20px;--background:url('assets/images/Group 903@3x.png');"> -->
+      <ion-buttons slot="end"> 
+        <ion-button  mode="md" shape="round" fill="outline" color="danger" style="height:30px;--height:30px;" (click)="goto_subsriptionPlan()">Subscribe</ion-button>
+      </ion-buttons>
+      <ion-label style="align-items: center;display: flex;font-weight:800;font-size:16px;">
+        <ion-icon style="font-size:20px" name="lock-open-outline"></ion-icon>
+        &nbsp;&nbsp;&nbsp;Unlock all Journey
+      </ion-label>
+    </ion-toolbar> <br>
+    </div>
+  </div>
+
+
+
+
+  <ion-grid class="sec-6" *ngIf="(!get_userData)">
+    <ion-row>
+      <ion-col size="6">
+        <ion-card mode="ios"  style="height:120px;">
+           <ion-skeleton-text animated style="height: 120px;width: 100%;margin:0px;padding:0px;"></ion-skeleton-text>
+        </ion-card>
+      </ion-col>
+  
+      <ion-col size="6">
+        <ion-card mode="ios"  style="height:120px;">
+           <ion-skeleton-text animated style="height: 120px;width: 100%;margin:0px;padding:0px;"></ion-skeleton-text>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+
+  <ion-grid class="sec-6" *ngIf="(get_userData)">
+    <ion-row>
+      <ion-col size="6">
+        <ion-card mode="ios"  style="--background:#FF3C3C" (click)="activateGiiftCard_ModalOpen()">
+          <ion-card-header style="text-align:center;padding-inline:10px;">
+            <div> <img style="height:40px;" src="assets/images/gift-card@3x.png"> </div>
+            <!-- <ion-icon src="assets/images/gift-card@3x.png"></ion-icon> -->
+            <ion-card-subtitle style="text-transform: capitalize;color:#fff;">Activate a Gift Card</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+  
+      <ion-col size="6">
+        <ion-card mode="ios"  style="--background:#fef7f7" (click)="sendGiift_ModalOpen()">
+          <ion-card-header style="text-align:center;padding-inline:10px;">
+            <div> <img style="height:40px;" src="assets/images/gift@3x.png"> </div>
+            <!-- <ion-icon src="assets/images/gift@3x.png"></ion-icon> -->
+            <!-- <ion-card-title><ion-icon name="gift-outline"></ion-icon> </ion-card-title> -->
+            <ion-card-subtitle style="text-transform: capitalize;">Send a Gift</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+  <div  *ngIf="(get_userData)"> <br>
+  <!-- <ion-item lines="full"  button  detail="true" (click)="goto_updateProfile()">
+    <ion-label style="font-weight:600;" color="danger"> Edit Profile </ion-label>
+  </ion-item> -->
+
+  <ion-item lines="full" button  detail="true" (click)="goto_updatePassword()">
+    <ion-label style="font-weight:600;" color="danger"> Change Password </ion-label>
+  </ion-item>
+  </div>
+
+  <div style="margin:0px 10px;" *ngIf="(!get_userData)">
+    <br> <ion-skeleton-text animated style="height: 45px;width: 100%;border-radius: 30px;"></ion-skeleton-text> <br>
+  </div>
+  <div class="ion-padding" style="margin:0px 10px;" *ngIf="(get_userData)">
+    <br> <ion-button mode="md" expand="block" fill="outline" shape="round" color="danger" (click)="logout_Confirmation()">Logout</ion-button> <br>
+  </div>
+    
+</div>
+</ion-content>

@@ -1,0 +1,43 @@
+<ion-header class="ion-no-border" style="--background: #ffffff !important;">
+  <ion-toolbar style="--background: #ffffff !important;">
+    <ion-title class="ion-text-center">More</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+
+
+<ion-content [fullscreen]="true">
+
+<ion-list mode="md"> <br>
+
+  <!-- <ion-item  mode="md"  lines="none"  detail="true" (click)="goto_app_setting()">
+    <ion-label>Application Settings</ion-label>
+  </ion-item><br> -->
+
+  <ion-item  mode="md"  lines="none"  detail="true" (click)="goto_subsriptionPlan()">
+    <ion-label>My Subscription</ion-label>
+  </ion-item><br>
+  <ion-item  mode="md"  lines="none"  detail="true" (click)="goto_personal_history()">
+    <ion-label>Personal History</ion-label>
+  </ion-item><br>
+  <ion-item  mode="md"  lines="none"  detail="true" (click)="goto_about()">
+    <ion-label>About Relaxationer</ion-label>
+  </ion-item><br>
+  <ion-item  mode="md"  lines="none"  detail="true" (click)="goto_privacy()">
+    <ion-label>Privacy Policy</ion-label>
+  </ion-item><br>
+  <ion-item  mode="md"  lines="none"  detail="true" (click)="goto_terms()">
+    <ion-label>Terms & Conditions</ion-label>
+  </ion-item><br>
+  <ion-item  mode="md"  lines="none"  detail="true" (click)="goto_contact()">
+    <ion-label>Contact Us</ion-label>
+  </ion-item><br>
+  <ion-item  mode="md"  lines="none"  detail="false" (click)="ask_logoutConfirm()">
+    <!-- <ion-label color="danger" >Logout</ion-label> -->
+    <ion-text color="danger" slot="start" style="font-weight: 600;">Logout</ion-text>
+    <ion-icon color="danger" slot="end" name="log-out-outline"></ion-icon>
+  </ion-item><br>
+</ion-list>
+
+</ion-content>

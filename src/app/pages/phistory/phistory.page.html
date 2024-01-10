@@ -1,0 +1,129 @@
+<ion-header>
+  <ion-toolbar >
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="/maintabs/tabs/tab1"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-start">Personal History</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content>
+
+  <div *ngIf="(!userPHistoryData)">
+    <ion-item  lines="full" detail="true">
+      <ion-label>
+        <h3><ion-skeleton-text animated style="width: 80%;"></ion-skeleton-text></h3>
+        <p><ion-skeleton-text animated style="width: 75%"></ion-skeleton-text></p>
+        <p><ion-skeleton-text animated style="width: 30%;margin-top: 10px;"></ion-skeleton-text></p>
+      </ion-label>
+    </ion-item>
+    <ion-item  lines="full"  detail="true">
+      <ion-label>
+        <h3><ion-skeleton-text animated style="width: 80%;"></ion-skeleton-text></h3>
+        <p><ion-skeleton-text animated style="width: 75%"></ion-skeleton-text></p>
+        <p><ion-skeleton-text animated style="width: 30%;margin-top: 10px;"></ion-skeleton-text></p>
+      </ion-label>
+    </ion-item>
+    <ion-item  lines="full"  detail="true">
+      <ion-label>
+        <h3><ion-skeleton-text animated style="width: 80%;"></ion-skeleton-text></h3>
+        <p><ion-skeleton-text animated style="width: 75%"></ion-skeleton-text></p>
+        <p><ion-skeleton-text animated style="width: 30%;margin-top: 10px;"></ion-skeleton-text></p>
+      </ion-label>
+    </ion-item>
+    <ion-item  lines="full"  detail="true">
+      <ion-label>
+        <h3><ion-skeleton-text animated style="width: 80%;"></ion-skeleton-text></h3>
+        <p><ion-skeleton-text animated style="width: 75%"></ion-skeleton-text></p>
+        <p><ion-skeleton-text animated style="width: 30%;margin-top: 10px;"></ion-skeleton-text></p>
+      </ion-label>
+    </ion-item>
+    <ion-item  lines="full"  detail="true">
+      <ion-label>
+        <h3><ion-skeleton-text animated style="width: 80%;"></ion-skeleton-text></h3>
+        <p><ion-skeleton-text animated style="width: 75%"></ion-skeleton-text></p>
+        <p><ion-skeleton-text animated style="width: 30%;margin-top: 10px;"></ion-skeleton-text></p>
+      </ion-label>
+    </ion-item>
+  </div>
+  
+  
+  <div *ngIf="(userPHistoryData?.length === 0)"  style="display:flex;flex-direction:column; align-items: center;justify-content: center;height:100%;font-weight:600;color: #666666;">
+    <div><ion-icon name="newspaper-outline" style="font-size: 40px;margin-bottom: 10px;color: #666666;"></ion-icon></div>
+    No History Found!
+  </div>
+  
+
+  
+  <ion-item button *ngFor="let ntd of userPHistoryData; let i=index" detail="false"  [ngClass]="{'unseen_class': ntd.status === 'unseen'}" style="---detail-icon-opacity:0.8">
+      <ion-label class="noti-ttf">
+        <h3 style="font-weight: 600;">{{ntd?.message}}</h3>
+        <p style="display: flex;align-items: center; margin-top: 8px;">
+           <ion-icon name="calendar-outline" style="font-size:16px;"></ion-icon>&nbsp;&nbsp;
+           <span style="font-size:12px; position: relative; top: 0px;font-weight:800;">{{ntd?.date}}</span>
+        </p>
+      </ion-label>
+  </ion-item>
+
+
+  <!-- <ion-list>
+    <ion-item class="button" lines="full">
+        <ion-label>
+           <h2>You started listening to the journey: Welcome to Relaxationer.</h2>
+           <p>18 Oct, 2021</p>
+        </ion-label>
+    </ion-item>
+    <ion-item class="button" lines="full">
+        <ion-label>
+           <h2>You started listening to the journey: Catching the Wave.</h2>
+           <p>18 Oct, 2021</p>
+        </ion-label>
+    </ion-item>
+    <ion-item class="button" lines="full">
+        <ion-label>
+           <h2>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</h2>
+           <p>18 Oct, 2021</p>
+        </ion-label>
+    </ion-item>
+    <ion-item class="button" lines="full">
+        <ion-label>
+           <h2>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque.</h2>
+           <p>18 Oct, 2021</p>
+        </ion-label>
+    </ion-item>
+    <ion-item class="button" lines="full">
+        <ion-label>
+           <h2>You started listening to the journey: Welcome to Relaxationer.</h2>
+           <p>18 Oct, 2021</p>
+        </ion-label>
+    </ion-item>
+    <ion-item class="button" lines="full">
+        <ion-label>
+           <h2>You started listening to the journey: Welcome to Relaxationer.</h2>
+           <p>18 Oct, 2021</p>
+        </ion-label>
+    </ion-item>
+    <ion-item class="button" lines="full">
+        <ion-label>
+           <h2>You started listening to the journey: Welcome to Relaxationer.</h2>
+           <p>18 Oct, 2021</p>
+        </ion-label>
+    </ion-item>
+    <ion-item class="button" lines="full">
+        <ion-label>
+           <h2>You started listening to the journey: Welcome to Relaxationer.</h2>
+           <p>18 Oct, 2021</p>
+        </ion-label>
+    </ion-item>
+    <ion-item class="button" lines="full">
+        <ion-label>
+           <h2>You started listening to the journey: Welcome to Relaxationer.</h2>
+           <p>18 Oct, 2021</p>
+        </ion-label>
+    </ion-item>
+  </ion-list> -->
+
+</ion-content>
+

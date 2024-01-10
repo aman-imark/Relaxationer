@@ -1,0 +1,35 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar  mode="ios" style="--min-height: 65px;">
+    <ion-buttons slot="start">
+      <ion-button disabled>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button color="dark" (click)="dismiss()">
+        <ion-icon slot="icon-only"  name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>Select Exp. Month/year</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <div class="ion-padding" style="font-weight:800;">
+    <ion-datetime style="margin: auto;"
+       #modalDatetime
+        [min]="currentDate"
+        [max]="futureDate"
+        [value]="currentDate"
+       presentation="month-year"
+       (ionChange)="dateValue = formatDate(modalDatetime.value)">
+    </ion-datetime>
+
+    <div class="ion-padding">
+    <ion-button mode="md" (click)="dismiss()" color="danger" expand="block" shape="round">Confirm</ion-button>
+    </div>
+
+  </div>
+
+</ion-content>

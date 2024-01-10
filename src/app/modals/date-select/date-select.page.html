@@ -1,0 +1,13 @@
+<ion-content>
+  <ion-toolbar>
+    <ion-title>Select Date of Birth</ion-title>
+    <ion-buttons slot="end">
+      <ion-button  (click)="dismiss()" color="dark">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ion-datetime presentation="date" showClearButton="true" [(ngModel)]="dateOfBirth" 
+                (ionChange)="selectDate(this.dateOfBirth)"
+                showDefaultButtons="true" format="YYYY-MM-DD"></ion-datetime>
+
+</ion-content>

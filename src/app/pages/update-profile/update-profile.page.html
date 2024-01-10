@@ -1,0 +1,154 @@
+<ion-header>
+  <ion-toolbar >
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="/maintabs/tabs/tab1"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-start">Edit Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <div> 
+  <ion-card mode="ios" *ngIf="(!get_userData)"> <br>
+      <div>
+          <ion-skeleton-text animated style="position:relative;width: 90px;height: 90px;border-radius: 50%;border: 4px solid #ffffff;margin: auto;text-align: center;"></ion-skeleton-text>
+      </div>
+      <ion-card-content>
+        <ion-grid>
+          <ion-row style="width:100%;color: #000000;border-bottom: 1px solid #ddd;align-items: center;">
+             <ion-col size="1">
+              <ion-icon name="person-outline"  style="font-size: 22px;color:#878787;"></ion-icon>
+             </ion-col>
+             <ion-col size="11">
+              <ion-item lines="none" style="position:relative;">
+                <ion-skeleton-text animated style="height: 25px;width: 100%;border-radius: 10px;"></ion-skeleton-text>
+              </ion-item>
+             </ion-col>
+          </ion-row> <br>
+
+          <ion-row style="width:100%;color: #000000;border-bottom: 1px solid #ddd;align-items: center;">
+            <ion-col size="1">
+             <ion-icon name="mail-outline"  style="font-size: 22px;color:#878787;"></ion-icon>
+            </ion-col>
+            <ion-col size="11">
+              <ion-item lines="none" style="position:relative;">
+                <ion-skeleton-text animated style="height: 25px;width: 100%;border-radius: 10px;"></ion-skeleton-text>
+              </ion-item>
+             </ion-col>
+          </ion-row> <br>
+
+          <ion-row style="width:100%;color: #000000;border-bottom: 1px solid #ddd;align-items: center;">
+            <ion-col size="1">
+             <ion-icon name="calendar-outline"  style="font-size: 22px;color:#878787;"></ion-icon>
+            </ion-col>
+            <ion-col size="11">
+             <ion-item lines="none" style="position:relative;">
+              <ion-skeleton-text animated style="height: 25px;width: 100%;border-radius: 10px;"></ion-skeleton-text>
+             </ion-item>
+            </ion-col>
+
+          </ion-row>
+        </ion-grid><br><br>
+        <div>
+          <ion-skeleton-text animated style="height: 45px;width: 100%;border-radius: 30px;"></ion-skeleton-text>
+        </div>
+      </ion-card-content>
+  </ion-card>
+
+  <ion-card mode="ios" *ngIf="(get_userData)"> <br>
+      <div  (click)="profilePic_changeClick()" style="width: 90px;height: 90px;border-radius: 50%;
+                    border: 2px solid #ddd;margin: auto;text-align: center; box-shadow: 0px 0px 10px 1px #00000029;">
+        <img [src]="user_img"  onError="this.src='assets/no_user.jpeg'" alt="Profile Image"
+             style="height:100%;width:100%;border-radius:50%; object-fit: cover; box-shadow: 0px 0px 10px 1px #00000029;">  
+      </div>
+
+      <ion-card-content>
+      <form [formGroup]="updatePROFILEForm"  (ngSubmit)="update_userProfile()">
+          <ion-grid>
+            <ion-row style="width:100%;color: #000000;border-bottom: 1px solid #ddd;align-items: center;">
+               <ion-col size="1">
+                <ion-icon name="person-outline"  style="font-size: 22px;margin-top: 4px;"></ion-icon>
+               </ion-col>
+               <ion-col size="11">
+                <ion-item lines="none" style="position:relative;--background:transparent;--color:#4f4f4f;--padding-start: 10px;--inner-padding-end: 10px;">
+                  <ion-input type="text" minlength="4" placeholder="Full Name"  name="name" formControlName="name" requird style="font-size:14px;"></ion-input>
+                </ion-item>
+               </ion-col>
+ 
+               <div *ngIf="(updatePROFILEForm.get('name').touched || submitted) &&  updatePROFILEForm.get('name').hasError('required')"  class="text-danger">Name is required.</div>
+               <div *ngIf="(updatePROFILEForm.get('name').touched || submitted) &&  updatePROFILEForm.get('name').hasError('minlength')"  class="text-danger">Name must be at least 4 characters long.</div>
+            </ion-row> <br>
+
+            <ion-row style="width:100%;color: #000000;border-bottom: 1px solid #ddd;align-items: center;">
+              <ion-col size="1">
+               <ion-icon name="mail-outline"  style="font-size: 22px;margin-top: 4px;"></ion-icon>
+              </ion-col>
+              <ion-col size="11">
+                <ion-item lines="none" style="position:relative;--background:transparent;--color:#4f4f4f;--padding-end: 0px;--padding-start: 10px;--inner-padding-end: 10px;">
+                  <ion-input type="text" placeholder="Email Address"  name="email" formControlName="email" readonly requird style="font-size:14px;"></ion-input>
+                </ion-item>
+               </ion-col>
+            </ion-row> <br>
+
+
+            <ion-row style="width:100%;color: #000000;border-bottom: 1px solid #ddd;align-items: center;">
+              <ion-col size="1">
+               <ion-icon name="calendar-outline"  style="font-size: 22px;margin-top:4px;"></ion-icon>
+              </ion-col>
+              <ion-col size="11">
+               <!-- <ion-item button detail="false" lines="none" style="position:relative;--background:transparent;--color:#4f4f4f;" id="open-modal"> -->
+               <ion-item button detail="false" lines="none" style="position:relative;--background:transparent;--color:#4f4f4f;--padding-start: 10px;--inner-padding-end: 10px;" (click)="selectDate_ModalOpen()">
+                <!-- <ion-datetime placeholder="Date of Birth*"  name="dob" formControlName="dob" requird></ion-datetime>  -->
+                <ion-input type="text"  placeholder="Date of Birth*"  name="dob" formControlName="dob" readonly requird style="font-size:14px;"></ion-input>
+               </ion-item>
+               <ion-modal #modal trigger="open-modal">
+                <ng-template>
+                  <ion-content>
+                    <ion-toolbar>
+                      <ion-title>Select Date of Birth</ion-title>
+                      <ion-buttons slot="end">
+                        <ion-button  mode="md" (click)="modal.dismiss()">Close</ion-button>
+                      </ion-buttons>
+                    </ion-toolbar>
+                 
+                    <ion-datetime presentation="date" showClearButton="true" [(ngModel)]="dateOfBirth" 
+                                  (ionChange)="selectDate(dateOfBirth)"
+                                  showDefaultButtons="true" format="YYYY-MM-DD"></ion-datetime>
+                                  {{dateOfBirth}}
+                  </ion-content>
+                </ng-template>
+              </ion-modal>
+              </ion-col>
+
+            </ion-row>
+          </ion-grid><br><br>
+          
+          <div>
+            <ion-button  mode="md" type="submit" shape="round" expand="block" style="--background:#FF0000;">Update</ion-button><br>
+          </div>
+      </form>
+      </ion-card-content>
+  </ion-card>
+  </div>
+
+
+<!-- <ion-button id="open-modal" expand="block">Open Modal</ion-button> -->
+  <!-- <ion-modal #modal trigger="open-modal">
+    <ng-template>
+      <ion-content>
+        <ion-toolbar>
+          <ion-title>Select Date of Birth</ion-title>
+          <ion-buttons slot="end">
+            <ion-button  (click)="modal.dismiss()">Close</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+     
+        <ion-datetime presentation="date" showClearButton="true" [(ngModel)]="dateOfBirth" 
+                      (ionChange)="selectDate(this.dateOfBirth)"
+                      showDefaultButtons="true" format="YYYY-MM-DD"></ion-datetime>
+     
+      </ion-content>
+    </ng-template>
+  </ion-modal> -->
+</ion-content>

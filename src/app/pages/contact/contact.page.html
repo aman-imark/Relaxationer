@@ -1,0 +1,111 @@
+<ion-header>
+  <ion-toolbar >
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="/maintabs/tabs/tab4"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-start">Contact us</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+  <div class="ion-padding">
+      <div *ngIf="(!contactUs?.title)" style="height: 25px; width: 70%; border-radius:4px; margin-bottom:25px;"><ion-skeleton-text animated style="width: 100%"></ion-skeleton-text></div>
+      <h3  *ngIf="(contactUs?.title)">{{contactUs?.title}}</h3>
+
+      <div *ngIf="(!contactUs?.description)" style="height: 100px; width: 100%; border-radius:4px; margin-bottom:12px;"><ion-skeleton-text animated style="width: 100%"></ion-skeleton-text></div>
+      <p *ngIf="(contactUs?.description)">{{contactUs?.description}}</p>
+  </div>
+
+  <ion-card mode="ios" *ngIf="(thanks_active === false)">
+    <ion-card-content>
+      <h3>Send Us a Message</h3><br>
+      <form [formGroup]="contactForm" (ngSubmit)="contact_usForm()">
+        <ion-row>
+          <ion-col size="12">
+            <ion-item lines="none" class="inputBox">
+              <ion-input type="text" minlength="5" placeholder="Full Name*" formControlName="fullname" name="fullname" required></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <div *ngIf="(contactForm.get('fullname').touched || submitted) &&  contactForm.get('fullname').hasError('required')"  class="text-danger">Name is required.</div>
+            <div *ngIf="(contactForm.get('fullname').touched || submitted) &&  contactForm.get('fullname').hasError('minlength')"  class="text-danger">Name must be at least 4 characters long.</div>
+          </ion-col>
+        </ion-row>
+        <br>
+  
+        <ion-row>
+          <ion-col size="12">
+            <ion-item lines="none" class="inputBox">
+              <ion-input type="email" placeholder="Email Address*" formControlName="email" name="email" required></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <div *ngIf="(contactForm.get('email').touched || submitted) &&  contactForm.get('email').hasError('required')"  class="text-danger">Email address is required.</div>
+            <div *ngIf="(contactForm.get('email').touched || submitted) &&  contactForm.get('email').hasError('email')"  class="text-danger">Email address must be valid.</div>
+          </ion-col>
+        </ion-row>
+        <br>
+
+        
+        <ion-row>
+          <ion-col size="12">
+            <ion-item lines="none" class="inputBox">
+              <div>
+                <ion-textarea #myTextArea autoGrow="false" rows="4" cols="20" minlength="5" placeholder="*Message here..." formControlName="message" name="message" required></ion-textarea>
+              </div>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <div *ngIf="(contactForm.get('message').touched || submitted) &&  contactForm.get('message').hasError('required')"  class="text-danger">Message is required.</div>
+            <div *ngIf="(contactForm.get('message').touched || submitted) &&  contactForm.get('message').hasError('minlength')"  class="text-danger">Message must be at least 4 characters long.</div>
+          </ion-col>
+        </ion-row>
+        <br> <br>
+  
+        <div> <ion-button mode="md" type="submit" expand="block" shape="round" color="danger">Send</ion-button>  </div>
+      </form>
+    </ion-card-content>
+  </ion-card>
+  
+  
+  <ion-card mode="ios" *ngIf="(thanks_active === true)">
+    <ion-card-content>
+      <h3>Thank you!</h3><br>
+      <ion-toolbar style="--min-height:auto;border-radius: 4px;--background: transparent linear-gradient(142deg, rgba(39, 240, 157, 1) 0%, rgb(7, 173, 235) 100%) 0% 0%;--color:#fff;font-weight:600;">
+        <ion-title size="small" style="padding-inline: 6px;padding: 8px;font-weight:600;">Contact Us Enquery Send Successfully.</ion-title>
+      </ion-toolbar>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
+
+<ion-footer *ngIf="footer?.facebook_link">
+  <div style="position: relative; bottom:0px; left:0px; right:0px; z-index: 2; background: #000000; color: #fff; letter-spacing: 0.5px; 
+  padding: 0px;">
+    <!-- padding: 12px 15px;" -->
+    <!-- <div style="display:flex; align-content:center;justify-content: center;">
+      <div style="height:40px;width:40px;"> <img src="assets/red-logo.png"> </div>
+      <div style="font-size: 25px;font-weight:600;">&nbsp;&nbsp;Relaxationer </div>
+    </div><br> -->
+    <ion-toolbar style="--background: transparent;--color:#ffffff;">
+      <ion-buttons style="justify-content: center;">
+        <ion-button style="--color: #ffffff; margin-inline: 8px;" [href]="footer?.facebook_link">
+          <ion-icon slot="icon-only" name="logo-facebook"></ion-icon>
+        </ion-button>
+        <ion-button style="--color: #ffffff; margin-inline: 8px;" [href]="footer?.instagram_link">
+          <ion-icon slot="icon-only" name="logo-instagram"></ion-icon>
+        </ion-button>
+        <ion-button style="--color: #ffffff; margin-inline: 8px;" [href]="footer?.twitter_link">
+          <ion-icon slot="icon-only" name="logo-twitter"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </div>
+</ion-footer>
+
+
+
+
+

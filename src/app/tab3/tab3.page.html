@@ -1,0 +1,83 @@
+<ion-header>
+    <ion-toolbar style="--min-height: 70px;color:red;">
+      <!-- Scrollable Segment -->
+
+      <div *ngIf="(!segmentBlog || segmentBlog?.length === 0)" style="display:flex;overflow:scroll;">
+       <div class="load-seg"><ion-skeleton-text animated></ion-skeleton-text></div>
+       <div class="load-seg"><ion-skeleton-text animated></ion-skeleton-text></div>
+       <div class="load-seg"><ion-skeleton-text animated></ion-skeleton-text></div>
+       <div class="load-seg"><ion-skeleton-text animated></ion-skeleton-text></div>
+       <div class="load-seg"><ion-skeleton-text animated></ion-skeleton-text></div>
+       <div class="load-seg"><ion-skeleton-text animated></ion-skeleton-text></div>
+       <div class="load-seg"><ion-skeleton-text animated></ion-skeleton-text></div>
+      </div>
+
+
+      <ion-segment *ngIf="(segmentBlog?.length >= 1)" mode="ios" class="my-journey-seg" 
+        [(ngModel)]="selectedSegBlog" scrollable="true"  (ionChange)="onSegmentChanged($event)">
+        <ion-segment-button mode="ios" *ngFor="let seg of segmentBlog; index as i"  [value]="i" id="segmentBlog-{{i}}">
+          <ion-label>{{seg.name}}</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+
+
+      <!-- <ion-segment  mode="ios" class="my-journey-seg ion-padding-bottom"  (ionChange)="segmentChanged($event)" [(ngModel)]="value_segmentChanged"  scrollable  style="--background: #ffffff !important;--min-height:auto;align-items: center;">
+          <ion-segment-button value="all">
+          <ion-label>All</ion-label>
+        </ion-segment-button>
+      </ion-segment> -->
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true"> 
+  <ion-refresher mode="md" slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  
+  <div  *ngIf="(!segmentBlog || segmentBlog?.length === 0)" style="width: 92%;margin: auto;">
+    <div><br>
+      <div style="height: 200px; width: 100%; border-radius:10px;"><ion-skeleton-text animated style="width: 100%"></ion-skeleton-text></div><br>
+      <div style="height: 25px; width: 85%; border-radius:4px;margin-bottom:20px;"><ion-skeleton-text animated style="width: 100%"></ion-skeleton-text></div>
+      <div style="height: 15px; width: 85%; border-radius:4px;margin-bottom:10px;"><ion-skeleton-text animated style="width: 100%"></ion-skeleton-text></div>
+      <div style="height: 15px; width: 75%; border-radius:4px;margin-bottom:10px;"><ion-skeleton-text animated style="width: 100%"></ion-skeleton-text></div>
+      <div style="height: 15px; width: 45%; border-radius:4px;margin-bottom:10px;"><ion-skeleton-text animated style="width: 100%"></ion-skeleton-text></div>
+      <ion-item-divider mode="ios"></ion-item-divider>
+      <br>
+    </div>
+    <div><br>
+      <div style="height: 200px; width: 100%; border-radius:10px;"><ion-skeleton-text animated style="width: 100%"></ion-skeleton-text></div><br>
+      <div style="height: 25px; width: 85%; border-radius:4px;margin-bottom:20px;"><ion-skeleton-text animated style="width: 100%"></ion-skeleton-text></div>
+      <div style="height: 15px; width: 85%; border-radius:4px;margin-bottom:10px;"><ion-skeleton-text animated style="width: 100%"></ion-skeleton-text></div>
+      <div style="height: 15px; width: 75%; border-radius:4px;margin-bottom:10px;"><ion-skeleton-text animated style="width: 100%"></ion-skeleton-text></div>
+      <div style="height: 15px; width: 45%; border-radius:4px;margin-bottom:10px;"><ion-skeleton-text animated style="width: 100%"></ion-skeleton-text></div>
+      <ion-item-divider mode="ios"></ion-item-divider>
+      <br>
+    </div>
+  </div>
+
+
+
+  <ion-slides #slides (ionSlideDidChange)="onSlideChanged()" scrollbar="false" [options]="slideConfig">  
+
+    <ion-slide *ngFor="let seg of segmentBlog">
+      <div *ngIf="(seg.blog?.length === 0)" style="display:flex;width:100%;height:80vh;align-items: center;justify-content: center;">
+          <h3 style="color:#666666 !important;;">No Result found!</h3>
+      </div>
+
+      <div *ngIf="(seg.blog?.length >= 1)"> 
+        <div  *ngFor="let itm of seg.blog"><br>
+          <div class="ion-padding-horizontal" style=" height: 210px; width: 100%;">
+            <img [src]="base_url+'/'+itm?.image" style="height:100%;width: 100%; border-radius:15px; object-fit:cover;">
+          </div><br> 
+          <div class="ion-padding-horizontal">
+            <h3 (click)="goto_blogDetails(itm.id)" style="margin: 0px 0px 5%;">{{itm?.title}}</h3>
+            <!-- <p [innerHtml]="itm?.description"></p>   -->
+          </div>
+          <ion-item-divider mode="ios"></ion-item-divider>
+        </div>
+      </div>
+    </ion-slide>  
+  </ion-slides> <br> 
+
+
+</ion-content>

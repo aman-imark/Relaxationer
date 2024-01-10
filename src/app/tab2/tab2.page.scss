@@ -1,0 +1,21 @@
+ion-row{
+   width:100%;
+}
+
+ion-card{
+   margin:12px;
+ }
+
+ .cust-icon-pencil{
+   height:30px !important; width:30px !important;
+   --padding-top: 5px !important;
+   --padding-end: 5px !important;
+   --padding-bottom: 5px !important;
+   --padding-start: 5px !important;
+   ion-icon{
+    --padding-top: 1px !important;
+    --padding-end: 1px !important;
+    --padding-bottom: 1px !important;
+    --padding-start: 1px !important;
+   }  
+ }

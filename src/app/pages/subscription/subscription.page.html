@@ -1,0 +1,128 @@
+<ion-header  mode="ios" class="ion-no-border">
+  <ion-toolbar style="--background: transparent;">
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref="/" style="color:#ffffff;"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+
+
+<ion-content [fullscreen]="true"  style="--background: url('assets/login_background.png')  no-repeat center center fixed;">
+
+
+<div class="ion-padding" *ngIf="planDetails">
+  <ion-toolbar style="--color: #842029; --background: #f8d7da; border-radius: 10px;">
+    <div style="padding: 20px;line-height: 1.5;font-size: 12px;
+    font-weight: 600;">Your Current Subscription Plan is:- {{planDetails?.plan_amount}} {{planDetails?.plan_currency | uppercase}}/{{planDetails?.plan_interval | uppercase}} which is expired on:- {{planDetails?.plan_end | date}}</div>
+  </ion-toolbar> <br> <br>
+</div>
+
+
+<div class="ion-padding-horizontal">
+  <div *ngIf="!planDetails" style="text-align:center;">
+    <h3 style="text-transform: uppercase;font-weight: 800;color:#ffffff !important;">UNLOCK ALL THE JOURNEY OF RELAXATIONER</h3><br>
+    <p style="color:#fff !important;">Monthly. 7-day free trial</p>
+    <p style="color:#fff !important;">Download and get a free 7 day RELAXATIONER meditation</p>
+    <br><br>
+  </div>
+
+
+    <div *ngIf="subscriptionData?.length > 1">
+    <ion-slides class="cust-dt-slides" mode="ios" [pager]="(subscriptionData?.length > 1)" [options]="slideOpts" style="overflow: visible;">
+      <ion-slide style="height: auto;background: #ffffff;color:#333333;border:1px solid #4fb1ea; border-radius: 25px;box-shadow:0px 0px 10px 4px #4fb1ea;">  
+      <div style="width:100%;">
+        <div>
+          <div style="display:flex;width:100%;align-items:center;justify-content: center;height:250px"><img  [src]="base_url+'/'+subscriptionDataA?.subs_image" style="width: 80%; height: 80%;object-fit: cover;"></div>
+        </div>
+        <div style="padding:0px 8%;">
+          <!-- <div class="h-arrow">
+             <div style="color:#4fb1ea !important;">{{subscriptionDataA?.subs_type}}</div>
+             <img src="assets/images/drp-arrow.png">
+          </div>  -->
+          <div [innerHtml]="subscriptionDataA?.subs_description"  style="text-align:center;"></div>
+        </div><br><br> 
+        <div class="priceDiv">
+            <div style="color:#4fb1ea !important;display:inline-flex;align-items: center;">
+              <ion-icon name="logo-usd" style="font-size:25px;"></ion-icon>
+              <ion-text style="font-size:25px;">{{subscriptionDataA?.subs_amount}}</ion-text> 
+              <ion-text style="font-size: 16px !important;">/mo</ion-text>
+            </div>
+            <div style="color:#bababa !important;font-weight: normal;">
+              <del style="display:inline-flex;align-items: center;"><ion-icon name="logo-usd" style="font-size:18px;"></ion-icon>
+              <ion-text style="font-size:18px;">{{subscriptionDataA?.subs_old_amount}}</ion-text> 
+              <ion-text style="font-size: 14px !important;">/mo</ion-text></del>
+            </div>
+        </div><br><br>
+      </div>
+      <div style="position:absolute;bottom:-20px;z-index:10;">
+          <ion-button mode="md" shape="round" style="--background:#4fb1ea;"  [disabled]="planDetails"  (click)="get_subscriptionPlan(subscriptionDataA?.id, subscriptionDataA?.title, subscriptionDataA?.subs_type, subscriptionDataA?.subs_amount)">Get monthly</ion-button>
+      </div> 
+      </ion-slide>  
+    
+      <ion-slide  style="height: auto;background: #ffffff;color:#333333;border:1px solid #f40a0b; border-radius: 25px;box-shadow:0px 0px 10px 4px #f40a0b;">
+      <div style="width:100%;"> 
+        <div>
+          <div style="display:flex;width:100%;align-items:center;justify-content: center;height:250px"><img  src="assets/subs/2.png" style="width: 80%; height: 80%;object-fit: cover;"></div>
+        </div>
+        <div style="padding:0px 8%;">
+          <!-- <div class="h-arrow">
+             <div style="color:#f40a0b !important;text-align:center;">{{subscriptionDataB?.subs_type}}</div>
+             <img src="assets/images/drp-arrow.png"> 
+          </div> -->
+          <div [innerHtml]="subscriptionDataB?.subs_description"  style="text-align:center;"></div>
+        </div><br><br> 
+        <div class="priceDiv">
+            <div style="color:#f40a0b !important;display:inline-flex;align-items: center;">
+              <ion-icon name="logo-usd" style="font-size:25px;"></ion-icon>
+              <ion-text style="font-size:25px;">{{subscriptionDataB?.subs_amount}}</ion-text> 
+              <ion-text style="font-size: 16px;">/mo</ion-text>
+            </div>
+            <div style="color:#bababa !important;font-weight: normal;">
+              <del style="display:inline-flex;align-items: center;"><ion-icon name="logo-usd" style="font-size:18px;"></ion-icon>
+              <ion-text style="font-size:18px;">{{subscriptionDataB?.subs_old_amount}}</ion-text> 
+              <ion-text style="font-size: 14px !important;">/mo</ion-text></del>
+            </div>
+        </div><br><br>
+      </div> 
+      <div style="position:absolute;bottom:-20px;z-index:10;">
+          <ion-button mode="md" shape="round" style="--background:#f40a0b;"  [disabled]="planDetails"  (click)="get_subscriptionPlan(subscriptionDataB?.id, subscriptionDataB?.title, subscriptionDataB?.subs_type, subscriptionDataB?.subs_amount)">Get yearly</ion-button>
+      </div> 
+      </ion-slide>
+
+      <ion-slide  style="height: auto;background: #ffffff;color:#333333;border:1px solid #530861; border-radius: 25px;box-shadow:0px 0px 10px 4px #530861;">
+      <div style="width:100%;"> 
+        <div>
+           <div style="display:flex;width:100%;align-items:center;justify-content: center;height:250px"><img  src="assets/subs/3.png" style="width: 80%; height: 80%;object-fit: cover;"></div>
+        </div>
+        <div style="padding:0px 8%;">
+           <!-- <div class="h-arrow">
+              <div style="color:#530861 !important;">{{subscriptionDataC?.subs_type}}</div>  
+              <img src="assets/images/drp-arrow.png">
+           </div> -->
+           <div [innerHtml]="subscriptionDataC?.subs_description"  style="text-align:center;"></div>
+        </div><br><br>
+        <div class="priceDiv">
+            <div style="color: #530861 !important;display:inline-flex;align-items: center;">
+              <ion-icon name="logo-usd" style="font-size:25px;"></ion-icon>
+              <ion-text style="font-size:25px;">{{subscriptionDataC?.subs_amount}}</ion-text>
+            </div>
+            <div style="color:#bababa !important;font-weight: normal;">
+              <del style="display:inline-flex;align-items: center;"><ion-icon name="logo-usd" style="font-size:18px;"></ion-icon>
+              <ion-text style="font-size:18px;">{{subscriptionDataC?.subs_old_amount}}</ion-text></del>
+            </div>
+        </div><br><br>
+      </div>
+      <div style="position:absolute;bottom:-20px;z-index:10;">
+        <ion-button mode="md" shape="round" style="--background:#530861;"  [disabled]="planDetails"  (click)="get_subscriptionPlan(subscriptionDataC?.id, subscriptionDataC?.title, subscriptionDataC?.subs_type, subscriptionDataC?.subs_amount)">Get lifetime</ion-button>
+      </div> 
+      </ion-slide> 
+    </ion-slides><br><br><br><br>
+    </div>
+
+
+ 
+  <br><br>
+</div>
+</ion-content>

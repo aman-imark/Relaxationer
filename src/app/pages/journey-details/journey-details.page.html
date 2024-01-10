@@ -1,0 +1,207 @@
+<ion-header class="ion-no-border" style="--background: transparent;position: absolute;top: 0px;">
+  <ion-toolbar style="--background: transparent;">
+    <ion-buttons>
+      <ion-back-button text="" defaultHref="/main/tabs/tab1"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+
+
+<ion-content [fullscreen]="true">
+  <!-- <ion-header class="ion-no-border" style="--background: transparent;position: absolute;top: 0px;">
+    <ion-toolbar style="--background: transparent;">
+      <ion-buttons>
+        <ion-back-button text="" defaultHref="/main/tabs/tab1"></ion-back-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header> -->
+
+  <ion-refresher mode="md" slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  
+  <div *ngIf="(!currentJourneyData)">
+      <ion-skeleton-text animated style="width:100%;height: 350px;"></ion-skeleton-text>
+      <ion-item lines="full" class="ion-padding-vertical">
+        <ion-skeleton-text animated style="width:95%;height: 30px;"></ion-skeleton-text>
+      </ion-item> 
+      <div class="ion-padding">
+        <h3><ion-skeleton-text animated style="width:70%;height: 30px;"></ion-skeleton-text></h3>
+        <p><ion-skeleton-text animated style="width:98%;;"></ion-skeleton-text></p>
+        <p><ion-skeleton-text animated style="width:100%;;"></ion-skeleton-text></p>
+        <p><ion-skeleton-text animated style="width:960%;"></ion-skeleton-text></p>
+        <p><ion-skeleton-text animated style="width:80%;;"></ion-skeleton-text></p><br>
+      </div>
+      <ion-item lines="full">
+        <ion-skeleton-text slot="start" animated style="width:35%;height: 30px;"></ion-skeleton-text>
+        <ion-skeleton-text slot="end" animated style="width:35%;height: 30px;border-radius:5px;"></ion-skeleton-text>
+      </ion-item> 
+      <div class="ion-padding">
+         <div style="display:flex;flex-direction: column;">
+           <div style="width:100%;"><ion-skeleton-text animated style="width:100%;height: 145px;border-radius:15px;"></ion-skeleton-text></div><br>
+           <div  style="width:100%;"><ion-skeleton-text animated style="width:100%;height: 145px;border-radius:15px;"></ion-skeleton-text></div><br>
+           <div  style="width:100%;"><ion-skeleton-text animated style="width:100%;height: 145px;border-radius:15px;"></ion-skeleton-text></div><br>
+           <div  style="width:100%;"><ion-skeleton-text animated style="width:100%;height: 145px;border-radius:15px;"></ion-skeleton-text></div><br>
+         </div>
+      </div>
+      <div style="margin:0px 20px;">
+        <br> <ion-skeleton-text animated style="height: 45px;width: 100%;border-radius: 30px;"></ion-skeleton-text> <br>
+      </div>
+  </div>
+
+
+<!-- [style.background]="'url('+tt+')'" -->
+  <div *ngIf="(currentJourneyData)">
+    <div  style="position:relative;width:100%;height:400px;top:0px;left:0px;right:0px;z-index:1;    
+          background-position: center center;
+          background-repeat: no-repeat;
+          background-size: cover;"  [style.background-image]="'url('+base_url+'/'+currentJourneyData?.image+')'">
+                
+       <!-- <div style="width:100%;height: 350px;">
+        <img style="width:100%;height: 100%;object-fit:cover;" [src]="base_url+'/'+currentJourneyData?.image">
+       </div> -->
+       <br>
+       <div class="action-outer">
+          <div class="action-outer-child">
+            <ion-card mode="ios" style="position:relative;text-align: center;color: #ffffff; 
+              --background: #00000030; width: 275px; height: 265px;display: flex;align-items: center;justify-content: center;">
+              <div>
+                <div>
+                  <ion-icon class="play-button" name="play-circle-outline" 
+                  (click)="playJourney_Music(currentJourneyData.play, currentJourneyData?.type, base_url+'/'+currentJourneyData?.image, currentJourneyData.id, 
+                  currentJourneyData.title, currentJourneyData.audio_time, currentJourneyData.fav, 
+                  currentJourneyData.original_name, currentJourneyData.download_link)"></ion-icon> 
+                  <ion-label>
+                    <h3 style="color:#fff !important;font-size: 22px !important;">{{currentJourneyData.title}}</h3>
+                    <p style="color:#fff !important;">{{currentJourneyData.audio_time}} Min</p>
+                  </ion-label>
+                </div>
+                <div style="margin:10px 0px 20px; font-weight: 800;">
+                  <div *ngIf="(currentJourneyData?.type === 'free')">
+                    <ion-chip mode="ios" style="background:#ff000070;height:25px !important;justify-content: center;"><small style="font-weight:600;color:#fff;">Free</small></ion-chip>
+                  </div>
+                  <div *ngIf="(currentJourneyData?.type === 'paid' && userPlan)">
+                    <ion-chip mode="ios" style="background:#1959ffb8;height:25px !important;justify-content: center;"><small style="font-weight:600;color:#fff;">Play</small></ion-chip>
+                  </div>
+                  <!-- <ion-chip>
+                   <ion-label>Free</ion-label>
+                  </ion-chip> -->
+                </div>  
+                <div>
+                  <ion-rating-stars
+                  [rating]="currentJourneyData.avgreview"
+                  [color]="'#e8e3e3'"
+                  [filledColor]="'#FF0000'"
+                  [margin]="4"
+                  [size]="20"
+                  [disabled]="true"></ion-rating-stars>
+                </div>
+              </div>
+            </ion-card>
+          </div>
+
+
+          <div class="youTube-trailer" style="width: 38%; border: 1.8px solid #fff;overflow: hidden; 
+                      margin: auto;display: inline-flex; justify-content: center; border-radius: 30px;background: #00000030;">
+            
+            <ion-item  [href]="currentJourneyData?.youtube_link" lines="none" detail="false" style="--background:transparent;--color:#fff;--min-height:35px;">
+              <ion-icon name="logo-youtube" style="color:#fff;"></ion-icon>
+              <ion-text style="font-size:12px;font-weight:600;">&nbsp;&nbsp;Watch Trailer</ion-text>
+            </ion-item>
+          </div>
+
+
+          <div style="position: absolute; top: 50px; right: 10px;width:12%; border:1x solid red;">
+            <ion-buttons mode="md" style="display: flex; flex-direction: column; height: 180px; justify-content: space-evenly;">
+              <ion-button  mode="md"  *ngIf="(currentJourneyData.fav === 'no')" class="cust-save" shape="round" (click)="addTo_Wishlist(currentJourneyData.id)">
+                <ion-icon slot="icon-only" name="heart-outline"></ion-icon>
+              </ion-button>
+              <ion-button  mode="md"  *ngIf="(currentJourneyData.fav === 'yes')" class="cust-save" shape="round" (click)="removeFrom_Wishlist(currentJourneyData.id)">
+                <ion-icon slot="icon-only" name="heart"></ion-icon>
+              </ion-button>
+        
+               <ion-button  mode="md"  class="cust-save" shape="round" (click)="shareJourney()">
+                 <ion-icon slot="icon-only" name="share-social-outline"></ion-icon>
+               </ion-button>
+
+               <ion-button  mode="md"  class="cust-save" shape="round"  (click)="download_JourneySong()">
+                 <ion-icon slot="icon-only" name="cloud-download-outline"></ion-icon>
+               </ion-button>
+             </ion-buttons>
+          </div>
+    </div>
+    </div>
+
+    <div class="ion-padding">
+      <div class="my-overlay">
+        <!-- <ion-label>
+          <h3>{{currentJourneyData.title}}</h3>
+          <p>{{currentJourneyData.audio_time}} Min</p>
+        </ion-label> -->
+        
+        <h3>{{route_level_title}}</h3>
+
+       <ion-chip mode="ios" *ngFor="let sl of allLevelData | slice:0:journey_level_id?.length; index as i" style="height: 36px; width: 20px;border-radius: 8px;
+        text-align: center;background: #07ee38;justify-content: center;padding-inline:0px;">
+         <small style="font-weight:600;color:#fff;">{{i+1}}</small>
+       </ion-chip>
+       <ion-chip mode="ios" *ngFor="let sl of allLevelData | slice:journey_level_id?.length; index as i" style="height: 36px; width: 20px;border-radius: 8px;
+        text-align: center;background: #1959ff;justify-content: center;padding-inline:0px;">
+         <small style="font-weight:600;color:#fff;">{{i+journey_level_id?.length+1}}</small>
+       </ion-chip>
+       <div *ngIf="(allLevelData?.length >= 1)">
+        <ion-progress-bar mode="ios" [value]="progressBar / 100"
+           style="margin-inline: 4px;--buffer-background:#66666624;--progress-background: #FF0000;"></ion-progress-bar>
+        <ion-text style="color:#666666;margin-inline: 4px;font-size: 12px;font-weight: 800;" >{{progressBar}}% Done</ion-text>
+       </div>
+        <div [innerHtml]="currentJourneyData.description" class="cstm"></div>
+      </div>
+    </div>
+
+    <div>
+      <ion-item mode="md" lines="none" detail="false"  style="--detail-icon-opacity:1;">
+        <ion-text slot="start" style="font-size:18px;color:#333333;font-weight: 600;">Reviews<span> ({{journeyReviewData?.length}})</span></ion-text>
+        <ion-button mode="md" color="danger" fill="solid" slot="end" shape="round" 
+        style="height:30px;font-size: 14px;width: 60%;" (click)="addNew_Review()">Rate & Review</ion-button>
+      </ion-item>
+      <div *ngIf="journeyReviewData?.length === 0" style="text-align:center;"><br>
+        <h4 style="color:#666666 !important;;">No Result found!</h4><br>
+      </div>
+      <div>
+        <ion-item  mode="ios" *ngFor="let rvw of journeyReviewData | slice:0:numOfData; let i=index" style="padding:6px;">
+          <ion-avatar slot="start">
+            <img [src]="rvw.avatar">
+          </ion-avatar>
+          <ion-label class="ion-text-wrap">
+            <h3 style="display: flex;align-items: center;justify-content: space-between;">
+              <span>{{rvw.name}}</span> 
+              <span style="font-size: 12px;color:#666666;">{{rvw.updated_at | date}}</span>
+            </h3>
+
+            <div style="margin:5px 0px;">
+              <ion-rating-stars
+              [rating]="rvw.rating"
+              [color]="'#e8e3e3'"
+              [filledColor]="'#FF0000'"
+              [margin]="4"
+              [size]="20"
+              [disabled]="true"></ion-rating-stars>
+            </div>
+            <p style="color:#666666;">{{rvw.review}}</p>
+          </ion-label>
+        </ion-item>
+        <ion-infinite-scroll *ngIf="(journeyReviewData?.length > numOfData)" (ionInfinite)="doInfinite($event)">
+          <ion-infinite-scroll-content
+            loadingSpinner="crescent"
+            distance="4%">
+          </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+      </div>
+    </div>
+
+
+  </div>  
+</ion-content>
